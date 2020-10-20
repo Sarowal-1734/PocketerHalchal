@@ -13,37 +13,45 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="2"
         android:paddingTop="15dp"
-        android:weightSum="2"
+        android:gravity="center"
         android:orientation="vertical">
-
         <ImageView
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:background="@drawable/edittext_design"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="100dp"
-            android:layout_marginTop="50dp"
-            />
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:weightSum="2"
+        android:orientation="vertical">
         <EditText
-            android:id="@+id/etIncome"
+            android:id="@+id/etUsername"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:paddingLeft="15dp"
-            android:layout_marginBottom="20dp"
-            android:hint="Email:"
+            android:layout_marginBottom="10dp"
+            android:hint="Username:"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
             android:background="@drawable/edittext_design"
             />
         <EditText
-            android:id="@+id/etSource"
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:paddingLeft="15dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:hint="Password:"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
@@ -54,32 +62,74 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="1"
+        android:weightSum="2"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:gravity="center_horizontal"
         android:orientation="vertical">
         <Button
             android:id="@+id/btSignIn"
-            android:layout_width="190dp"
-            android:layout_height="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:text="Sign In"
             android:background="@drawable/button_design"
-            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textAllCaps="false"
+            android:textSize="18sp"
             />
         <Button
-            android:id="@+id/btSignUp"
-            android:layout_width="190dp"
-            android:layout_height="70dp"
-            android:text="Sign Up"
-            android:background="@drawable/button_design"
-            android:textStyle="bold"
+            android:id="@+id/btFacebook"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Connect With Facebook"
+            android:background="@drawable/button_facebook"
             android:textColor="@color/white"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
+            android:layout_marginBottom="10dp"
+            android:drawableLeft="@mipmap/facebook_foreground"
+            android:textSize="18sp"
+            android:gravity="fill"
             android:textAllCaps="false"
             />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:weightSum="2"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tvForgotPassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Forgot your password?"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:clickable="true"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tvSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Don't have an account? Sign Up"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:clickable="true"
+                />
+        </LinearLayout>
+
+
     </LinearLayout>
 
 </LinearLayout>

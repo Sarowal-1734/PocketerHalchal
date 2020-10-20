@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">PocketerHalchal</string>
+    <string name="app_name">Pocketer Halchal</string>
+    <string name="terms_condition">By clicking Sign Up, You agree to our Terms &amp; Conditions and that you have read our Privacy Policy</string>
 </resources>

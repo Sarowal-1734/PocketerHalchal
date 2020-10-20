@@ -7,26 +7,31 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
-public class activity_signIn extends AppCompatActivity {
+public class ActivitySignUp extends AppCompatActivity {
 
-    EditText etUsername, etPassword;
-    Button btSignIn;
-    TextView tvSignUp, tvForgotPassword;
+    EditText etUsername, etEmail, etPassword, etRetypePassword;
+    Button btSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
+        setContentView(R.layout.activity_sign_up);
 
         etUsername = findViewById(R.id.etUsername);
+        etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
-        btSignIn = findViewById(R.id.btSignIn);
-        tvForgotPassword = findViewById(R.id.tvForgotPassword);
-        tvSignUp = findViewById(R.id.tvSignUp);
+        etRetypePassword = findViewById(R.id.etRetypePassword);
+        btSignUp = findViewById(R.id.btSignUp);
 
         etUsername.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        etEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -38,25 +43,19 @@ public class activity_signIn extends AppCompatActivity {
 
             }
         });
-        btSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity_signIn.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+        etRetypePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
-        tvSignUp.setOnClickListener(new View.OnClickListener() {
+        btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity_signIn.this, ActivitySignUp.class);
+                Toast.makeText(getApplicationContext(), "Account Created Successfully!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ActivitySignUp.this, activity_signIn.class);
                 startActivity(intent);
+                finish();
             }
         });
 

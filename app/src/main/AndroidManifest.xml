@@ -2,9 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dynamic_host.pocketerhalchal">
 
-    android:versionCode="1"
-    android:versionName="1.0" >
-
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="30" />
@@ -17,22 +14,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="true"
-        android:theme="@style/Theme.PocketerHalchal" >
+        android:theme="@style/Theme.PocketerHalchal">
+        <activity android:name=".ActivitySignUp"></activity>
         <activity
-            android:name="com.dynamic_host.pocketerhalchal.activity_expense"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.dynamic_host.pocketerhalchal.ActivityIncome"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.dynamic_host.pocketerhalchal.MainActivity"
-            android:screenOrientation="portrait" >
+            android:name=".activity_signIn"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity_expense"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityIncome"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

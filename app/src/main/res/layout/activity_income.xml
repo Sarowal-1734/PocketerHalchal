@@ -83,10 +83,8 @@
             android:layout_height="70dp"
             android:text="Submit"
             android:background="@drawable/button_design"
-            android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:textAllCaps="false"
             />
     </LinearLayout>
 

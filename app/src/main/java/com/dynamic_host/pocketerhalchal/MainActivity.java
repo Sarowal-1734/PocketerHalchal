@@ -41,7 +41,13 @@ public class MainActivity extends AppCompatActivity {
         btReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Report Clicked", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(), "Report Clicked", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(MainActivity.this,Activity_Report.class);
+                startActivity(intent);
+                finish();
+
+
             }
         });
 

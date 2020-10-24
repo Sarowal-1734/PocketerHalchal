@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.PocketerHalchal">
-        <activity android:name=".Activity_Report"></activity>
+        <activity android:name=".ActivityMonthlyReport"></activity>
         <activity
             android:name=".ActivitySignUp"
             android:screenOrientation="portrait" />

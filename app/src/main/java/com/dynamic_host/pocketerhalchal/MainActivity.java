@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         btReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ActivityMonthlyReport.class);
+                Intent intent = new Intent(MainActivity.this, Activity_Report.class);
                 startActivity(intent);
             }
         });

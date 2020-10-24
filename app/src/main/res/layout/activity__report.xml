@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity_Report"
-    >
-
-
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/black"
+    android:weightSum="14"
+    tools:context=".ActivityIncome">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:text="Monthly Report"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"/>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ShowReport"
-        android:layout_width="395dp"
-        android:layout_height="570dp">
-
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-    
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ShowReport"
-        android:layout_alignRight="@id/ShowReport"
-        android:background="@drawable/pdf"
-        android:padding="5dp"
-        />
-
-
-
-
-</RelativeLayout>
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="11"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="end">
+        <ImageButton
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:background="@drawable/pdf"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+</LinearLayout>

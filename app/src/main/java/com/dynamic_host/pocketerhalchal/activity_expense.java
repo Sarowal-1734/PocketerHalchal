@@ -29,8 +29,7 @@ public class activity_expense extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Expense Added Successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(activity_expense.this, MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 

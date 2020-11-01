@@ -3,7 +3,7 @@
     package="com.dynamic_host.pocketerhalchal">
 
     <uses-sdk
-        android:minSdkVersion="16"
+        android:minSdkVersion="21"
         android:targetSdkVersion="30" />
 
     <application
@@ -30,13 +30,15 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity_expense"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".Activity_Report"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActivityIncome"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />

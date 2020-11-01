@@ -29,8 +29,7 @@ public class ActivityIncome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Income Added Successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ActivityIncome.this, MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 

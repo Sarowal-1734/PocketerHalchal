@@ -79,8 +79,8 @@
         android:gravity="center">
         <Button
             android:id="@+id/btSubmit"
-            android:layout_width="190dp"
-            android:layout_height="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Submit"
             android:background="@drawable/button_design"
             android:textColor="@color/white"

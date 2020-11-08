@@ -3,7 +3,7 @@
     package="com.dynamic_host.pocketerhalchal">
 
     <uses-sdk
-        android:minSdkVersion="16"
+        android:minSdkVersion="21"
         android:targetSdkVersion="30" />
 
     <application
@@ -15,28 +15,37 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.PocketerHalchal">
-        <activity android:name=".SettingsActivity" android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".SettingsActivity" android:screenOrientation="portrait"
+            android:label="Settings"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".activity_signIn"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ActivitySignUp"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:label="Sign Up"/>
         <activity
             android:name=".activity_expense"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"
+            android:label="Add Expense"/>
         <activity
             android:name=".Activity_Report"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:label="Monthly Report"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".ActivityIncome"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"
+            android:label="Add Income"/>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />

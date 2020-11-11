@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         PieDataSet dataSet = new PieDataSet(entries,"");
         dataSet.setSliceSpace(0.5f);
         dataSet.setValueTextSize(14f);
-        dataSet.setSelectionShift(0f);
+        dataSet.setSelectionShift(5f);
         //Add custom color
         int[] colors = new int[] {Color.GREEN, Color.RED};
         dataSet.setColors(colors);

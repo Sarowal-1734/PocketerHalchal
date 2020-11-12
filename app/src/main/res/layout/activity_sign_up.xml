@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,9 +19,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome!"
+            android:text="@string/welcome"
             android:textColor="@color/white"
-            android:textSize="30dp"/>
+            android:textSize="30sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -38,51 +37,65 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:layout_marginBottom="10dp"
-            android:hint="Username:"
+            android:hint="@string/username"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:inputType="text"
+            android:drawableStart="@drawable/ic_user"
+            android:drawablePadding="5dp"
             android:background="@drawable/edittext_design"
-            />
+            android:autofillHints="@string/username" />
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:layout_marginBottom="10dp"
-            android:hint="Email:"
+            android:drawableStart="@drawable/ic_mail"
+            android:drawablePadding="5dp"
+            android:hint="@string/email"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:inputType="textEmailAddress"
             android:background="@drawable/edittext_design"
-            />
+            android:autofillHints="@string/email" />
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:layout_marginBottom="10dp"
-            android:hint="Password:"
+            android:hint="@string/password"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:inputType="textPassword"
-            android:background="@drawable/edittext_design" />
+            android:drawableStart="@drawable/ic_password"
+            android:drawablePadding="5dp"
+            android:background="@drawable/edittext_design"
+            android:autofillHints="@string/password" />
         <EditText
             android:id="@+id/etRetypePassword"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             android:layout_marginBottom="10dp"
-            android:hint="Retype Password:"
+            android:hint="@string/retype_password"
+            android:drawableStart="@drawable/ic_password"
+            android:drawablePadding="5dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:inputType="textPassword"
-            android:background="@drawable/edittext_design" />
+            android:background="@drawable/edittext_design"
+            android:autofillHints="@string/retype_password" />
     </LinearLayout>
 
     <LinearLayout
@@ -104,7 +117,7 @@
             android:id="@+id/btSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign Up"
+            android:text="@string/sign_up_button"
             android:background="@drawable/button_design"
             android:textColor="@color/white"
             android:gravity="center"/>

@@ -17,58 +17,59 @@
         android:weightSum="2"
         android:orientation="vertical">
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/etIncome"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <EditText
-                android:id="@+id/etIncome"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="15dp"
-                android:layout_marginBottom="20dp"
-                android:hint="Add Income Amount:"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:inputType="number"
-                android:background="@drawable/edittext_design"
-                />
-            <EditText
-                android:id="@+id/etSource"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="15dp"
-                android:layout_marginBottom="20dp"
-                android:hint="Source:"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:inputType="text"
-                android:background="@drawable/edittext_design"
-                />
-            <EditText
-                android:id="@+id/etDate"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="15dp"
-                android:layout_marginBottom="20dp"
-                android:textColor="@color/white"
-                android:hint="DD/MM/YYYY"
-                android:drawableRight="@mipmap/calendar_foreground"
-                android:textColorHint="@color/white"
-                android:inputType="date"
-                android:background="@drawable/edittext_design"/>
-            <EditText
-                android:id="@+id/etDescription"
-                android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:paddingLeft="15dp"
-                android:textColor="@color/white"
-                android:hint="Description:"
-                android:textColorHint="@color/white"
-                android:background="@drawable/edittext_design"
-                />
-        </LinearLayout>
-
+            android:layout_height="50dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:layout_marginBottom="20dp"
+            android:hint="@string/add_income_amount"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:inputType="number"
+            android:background="@drawable/edittext_design"
+            android:autofillHints="@string/add_income_amount" />
+        <EditText
+            android:id="@+id/etSource"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:layout_marginBottom="20dp"
+            android:hint="@string/source"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:inputType="text"
+            android:background="@drawable/edittext_design"
+            android:autofillHints="@string/source" />
+        <EditText
+            android:id="@+id/etDate"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/white"
+            android:hint="@string/dd_mm_yyyy"
+            android:drawableEnd="@mipmap/calendar_foreground"
+            android:textColorHint="@color/white"
+            android:inputType="date"
+            android:background="@drawable/edittext_design"
+            android:autofillHints="@string/dd_mm_yyyy" />
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:lines="8"
+            android:padding="15dp"
+            android:gravity="top"
+            android:textColor="@color/white"
+            android:hint="@string/description"
+            android:textColorHint="@color/white"
+            android:background="@drawable/edittext_design"
+            android:autofillHints="@string/description" />
     </LinearLayout>
 
     <LinearLayout
@@ -80,7 +81,7 @@
             android:id="@+id/btSubmit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Submit"
+            android:text="@string/submit"
             android:background="@drawable/button_design"
             android:textColor="@color/white"
             android:textSize="20sp"

@@ -113,10 +113,10 @@
                 android:layout_height="wrap_content"
                 android:text="About Us"
                 android:layout_gravity="end|bottom"
-                android:textColor="@color/white"
+                android:textColor="@color/red"
                 android:textStyle="bold"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"/>
+                android:layout_alignParentEnd="true"/>
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

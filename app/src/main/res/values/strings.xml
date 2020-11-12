@@ -3,4 +3,22 @@
     <string name="terms_condition">By clicking Sign Up, You agree to our <font color='#FF0000'>Terms &amp; Conditions</font> and that you have read our <font color='#FFE91E63'>Privacy Policy</font></string>
     <string name="sign_up">Dont have an account? <font color="#FF0000">Sign Up</font></string>
     <string name="forgot_password">Forgot your password?</string>
+    <string name="add_income_amount">Add Income Amount:</string>
+    <string name="source">Source:</string>
+    <string name="dd_mm_yyyy">DD/MM/YYYY</string>
+    <string name="description">Description:</string>
+    <string name="submit">Submit</string>
+    <string name="add_expense_amount">Add Expense Amount:</string>
+    <string name="expense_item">Expense Item:</string>
+    <string name="username">Username:</string>
+    <string name="password">Password:</string>
+    <string name="sign_in">Sign In</string>
+    <string name="connect_with_facebook">Connect With Facebook</string>
+    <string name="welcome">Welcome!</string>
+    <string name="email">Email:</string>
+    <string name="retype_password">Retype Password:</string>
+    <string name="sign_up_button">Sign Up</string>
+    <string name="date">Date</string>
+    <string name="item">Item</string>
+    <string name="cost">Cost</string>
 </resources>

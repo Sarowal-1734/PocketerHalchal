@@ -15,7 +15,6 @@
         android:layout_weight="1"
         android:orientation="horizontal"
         android:weightSum="3"
-        android:background="#00BCD4"
         >
         <TextView
             android:layout_width="0dp"
@@ -24,7 +23,11 @@
             android:text="@string/date"
             android:textColor="@color/black"
             android:layout_marginEnd="2dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:layout_marginRight="5dp"
+            android:background="#00BCD4"
+            android:textAlignment="center"
+            />
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -32,14 +35,22 @@
             android:text="@string/item"
             android:layout_marginEnd="2dp"
             android:textColor="@color/black"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:layout_marginLeft="5dp"
+            android:background="#00BCD4"
+            android:textAlignment="center"
+            />
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/cost"
             android:textColor="@color/black"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:layout_marginLeft="5dp"
+            android:background="#00BCD4"
+            android:textAlignment="center"
+            />
     </LinearLayout>
     <ListView
         android:id="@+id/list_view"

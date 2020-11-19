@@ -46,7 +46,7 @@
             android:textColorHint="@color/white"
             android:inputType="text"
             android:drawableStart="@drawable/ic_user"
-            android:drawablePadding="5dp"
+            android:drawablePadding="10dp"
             android:background="@drawable/edittext_design"
             android:autofillHints="@string/username" />
         <EditText
@@ -62,7 +62,7 @@
             android:textColorHint="@color/white"
             android:inputType="textPassword"
             android:drawableStart="@drawable/ic_password"
-            android:drawablePadding="5dp"
+            android:drawablePadding="10dp"
             android:background="@drawable/edittext_design"
             android:autofillHints="@string/password" />
     </LinearLayout>

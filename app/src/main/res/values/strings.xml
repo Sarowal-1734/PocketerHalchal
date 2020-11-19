@@ -21,4 +21,11 @@
     <string name="date">Date</string>
     <string name="item">Item</string>
     <string name="cost">Cost</string>
+    <string name="mr_username">Mr. Username</string>
+    <string name="about_us">About Us</string>
+    <string name="logout">Logout</string>
+    <string name="bangla">বাংলা</string>
+    <string name="dark">Dark</string>
+    <string name="english">English</string>
+    <string name="light">Light</string>
 </resources>

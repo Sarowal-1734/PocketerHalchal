@@ -88,7 +88,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
                 AlertDialog alertDialog;
-                builder.setMessage("Do you want to log out");
+                builder.setMessage("Do you want to log out?");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

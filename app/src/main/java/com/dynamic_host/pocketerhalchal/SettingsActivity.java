@@ -31,7 +31,6 @@ public class SettingsActivity extends AppCompatActivity {
     CircleImageView ivProfilePic;
     private static final int PICK_IMAGE = 1;
     Uri imageUri;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +39,6 @@ public class SettingsActivity extends AppCompatActivity {
         btLogout = findViewById(R.id.btLogout);
         tvUserName = findViewById(R.id.tvUserName);
         ivProfilePic = findViewById(R.id.ivProfilePic);
-
         ivProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +63,7 @@ public class SettingsActivity extends AppCompatActivity {
                 userName.setInputType(InputType.TYPE_CLASS_TEXT); //Single Line EditText
                 ab.setView(userName);
 
-                //Setting Negative "Save" Button
+                //Setting positive "Save" Button
                 ab.setPositiveButton("Save",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int which) {
@@ -88,12 +86,31 @@ public class SettingsActivity extends AppCompatActivity {
         btLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this,activity_signIn.class);
-                startActivity(intent);
-                finish();
+                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+                AlertDialog alertDialog;
+                builder.setMessage("Do you want to log out?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                        Toast.makeText(SettingsActivity.this,"Logging Out",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SettingsActivity.this,activity_signIn.class);
+                        startActivity(intent);
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        Toast.makeText(SettingsActivity.this,"Welcome Back",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                // Creating Dialog
+                alertDialog = builder.create();
+                alertDialog.setTitle("Logout Alert");
+                alertDialog.show();
             }
         });
-
     }
 
     // Picking photo from external storage

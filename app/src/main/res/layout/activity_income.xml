@@ -53,6 +53,7 @@
             android:textColor="@color/white"
             android:text="@string/dd_mm_yyyy"
             android:drawableEnd="@mipmap/calendar_foreground"
+            android:gravity="center|left"
             android:textColorHint="@color/white"
             android:background="@drawable/edittext_design"
              />

@@ -55,6 +55,7 @@
             android:textColorHint="@color/white"
             android:inputType="date"
             android:background="@drawable/edittext_design"
+            android:gravity="center|left"
              />
         <EditText
             android:id="@+id/etDescription"

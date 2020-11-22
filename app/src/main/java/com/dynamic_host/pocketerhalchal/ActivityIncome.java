@@ -34,7 +34,7 @@ public class ActivityIncome extends AppCompatActivity {
         etIncome = findViewById(R.id.etIncome);
         etSource = findViewById(R.id.etSource);
         tvDate = findViewById(R.id.tvDate);
-        etDescription = findViewById(R.id.etDescription)
+        etDescription = findViewById(R.id.etDescription);
                 
         tvDate.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)

@@ -53,6 +53,7 @@ public class activity_expense extends AppCompatActivity {
         myDateSetLister = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month+1;
                 String date = dayOfMonth+"/"+month+"/"+year;
                 tvDate.setText(date);
             }

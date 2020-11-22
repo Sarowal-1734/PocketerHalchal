@@ -34,7 +34,8 @@ public class ActivityIncome extends AppCompatActivity {
         etIncome = findViewById(R.id.etIncome);
         etSource = findViewById(R.id.etSource);
         tvDate = findViewById(R.id.tvDate);
-        etDescription = findViewById(R.id.etDescription);
+        etDescription = findViewById(R.id.etDescription)
+                
         tvDate.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -53,8 +54,9 @@ public class ActivityIncome extends AppCompatActivity {
         myDateSetLister = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                  String date = dayOfMonth+"/"+month+"/"+year;
-                  tvDate.setText(date);
+                month = month+1;
+                String date = dayOfMonth+"/"+month+"/"+year;
+                tvDate.setText(date);
             }
         };
 

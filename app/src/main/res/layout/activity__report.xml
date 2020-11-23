@@ -1,69 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".ReportActivity"
+    android:background="@color/black"
+    android:weightSum="9"
     android:orientation="vertical"
     android:padding="20dp"
-    android:weightSum="14"
-    tools:context=".IncomeActivity"
-    android:background="@color/black"
     >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:weightSum="3">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/date"
-            android:textColor="@color/black"
-            android:layout_marginEnd="2dp"
-            android:textSize="20sp"
-            android:layout_marginRight="10dp"
-            android:background="#00BCD4"
-            android:textAlignment="center"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/item"
-            android:layout_marginEnd="2dp"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:background="#00BCD4"
-            android:textAlignment="center"
-            />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/cost"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:background="#00BCD4"
-            android:textAlignment="center"
-            />
-    </LinearLayout>
-    <ListView
-        android:id="@+id/list_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="12" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="end">
-        <ImageButton
-            android:layout_width="25dp"
-            android:layout_height="30dp"
-            android:background="@drawable/pdf"
-            android:layout_gravity="center_vertical"/>
-    </LinearLayout>
+
+    <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           android:layout_weight=".5"
+        >
+           <TextView
+               android:id="@+id/filter"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentBottom="true"
+               android:text="Filter By"
+               android:textSize="18sp"
+               android:textColor="@color/white"
+               android:layout_gravity="center"
+               android:paddingStart="15dp"
+               android:paddingEnd="15dp"
+               android:textAlignment="center"
+               android:layout_marginBottom="5dp"
+               />
+
+           <CheckBox
+               android:id="@+id/cbIncome"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Income"
+               android:textSize="18sp"
+               android:textColor="@color/white"
+               android:buttonTint="@color/green"
+               android:layout_marginRight="10dp"
+               android:layout_toLeftOf="@id/cbExpense"
+               android:layout_alignParentBottom="true"
+               android:onClick="onCheckBoxClicked"
+
+               />
+           <CheckBox
+               android:id="@+id/cbExpense"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Expense"
+               android:textSize="18sp"
+               android:textColor="@color/white"
+               android:buttonTint="@color/red"
+               android:layout_alignParentEnd="true"
+               android:layout_alignParentBottom="true"
+               android:onClick="onCheckBoxClicked"
+               />
+       </RelativeLayout>
+<ListView
+    android:id="@+id/list_report"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="8"
+    />
 </LinearLayout>

@@ -1,33 +1,29 @@
 package com.dynamic_host.pocketerhalchal;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.Calendar;
 
-public class IncomeActivity extends AppCompatActivity {
+public class ActivityIncome extends AppCompatActivity {
 
     Button btSubmit;
-    EditText etIncome,etDescription;
-    Spinner spSource;
+    EditText etIncome, etSource,etDescription;
     private DatePickerDialog.OnDateSetListener myDateSetLister;
-    TextView tvDate, tvSource;
+    TextView tvDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +32,10 @@ public class IncomeActivity extends AppCompatActivity {
 
         btSubmit = findViewById(R.id.btSubmit);
         etIncome = findViewById(R.id.etIncome);
-        spSource = findViewById(R.id.spSource);
+        etSource = findViewById(R.id.etSource);
         tvDate = findViewById(R.id.tvDate);
-        tvSource = findViewById(R.id.tvSource);
-        etDescription = findViewById(R.id.etDescription);
-
-        setupSpinner();
-
+        etDescription = findViewById(R.id.etDescription)
+                
         tvDate.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -51,7 +44,7 @@ public class IncomeActivity extends AppCompatActivity {
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dialog = new DatePickerDialog(IncomeActivity.this,
+                DatePickerDialog dialog = new DatePickerDialog(ActivityIncome.this,
                         android.R.style.Theme_Holo_Dialog_NoActionBar_MinWidth,
                         myDateSetLister,year,month,day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -76,23 +69,5 @@ public class IncomeActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void setupSpinner() {
-        ArrayAdapter incomeSourceAdapter = ArrayAdapter.createFromResource(IncomeActivity.this, R.array.income_source, R.layout.spinner_item);
-        incomeSourceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spSource.setAdapter(incomeSourceAdapter);
-
-        spSource.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selection = (String) parent.getItemAtPosition(position);
-                //tvSource.setText("Source: "+selection);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
     }
 }

@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         btIncome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ActivityIncome.class);
+                Intent intent = new Intent(MainActivity.this, IncomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -46,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         btExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, activity_expense.class);
+                Intent intent = new Intent(MainActivity.this, ExpenseActivity.class);
                 startActivity(intent);
             }
         });
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         btReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Activity_Report.class);
+                Intent intent = new Intent(MainActivity.this, ReportActivity.class);
                 startActivity(intent);
             }
         });

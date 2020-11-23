@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class ActivitySignUp extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     EditText etUsername, etEmail, etPassword, etRetypePassword;
     Button btSignUp;
@@ -53,7 +53,7 @@ public class ActivitySignUp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Account Created Successfully!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ActivitySignUp.this, activity_signIn.class);
+                Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
                 startActivity(intent);
                 finish();
             }

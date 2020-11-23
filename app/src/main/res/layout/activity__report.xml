@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="20dp"
     android:weightSum="14"
-    tools:context=".ActivityIncome"
+    tools:context=".IncomeActivity"
     android:background="@color/black"
     >
     <LinearLayout
@@ -14,8 +14,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"
-        android:weightSum="3"
-        >
+        android:weightSum="3">
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"

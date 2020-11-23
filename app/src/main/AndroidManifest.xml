@@ -18,11 +18,7 @@
         android:testOnly="true"
         android:theme="@style/Theme.PocketerHalchal">
         <activity
-            android:name=".SettingsActivity" android:screenOrientation="portrait"
-            android:label="Settings"
-            android:parentActivityName=".MainActivity"/>
-        <activity
-            android:name=".activity_signIn"
+            android:name=".SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,24 +26,33 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActivitySignUp"
-            android:screenOrientation="portrait"
-            android:label="Sign Up"/>
-        <activity
-            android:name=".activity_expense"
-            android:screenOrientation="portrait"
+            android:name=".SettingsActivity"
+            android:label="Settings"
             android:parentActivityName=".MainActivity"
-            android:label="Add Expense"/>
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity_Report"
-            android:screenOrientation="portrait"
+            android:name=".SignInActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".SignUpActivity"
+            android:label="Sign Up"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ExpenseActivity"
+            android:label="Add Expense"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReportActivity"
             android:label="Monthly Report"
-            android:parentActivityName=".MainActivity"/>
-        <activity
-            android:name=".ActivityIncome"
-            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
-            android:label="Add Income"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".IncomeActivity"
+            android:label="Add Income"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />

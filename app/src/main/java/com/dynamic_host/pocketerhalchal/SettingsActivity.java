@@ -18,8 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -94,7 +92,7 @@ public class SettingsActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
                         Toast.makeText(SettingsActivity.this,"Logging Out",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(SettingsActivity.this,activity_signIn.class);
+                        Intent intent = new Intent(SettingsActivity.this, SignInActivity.class);
                         startActivity(intent);
                     }
                 });

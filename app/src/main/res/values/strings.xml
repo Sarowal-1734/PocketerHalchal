@@ -1,4 +1,32 @@
 <resources>
+
+    <string-array name="income_source">
+        <item>Salary</item>
+        <item>Business Revenue</item>
+        <item>Others Revenue</item>
+        <item>Loan</item>
+        <item>Gift</item>
+        <item>Get From Relative</item>
+        <item>Get From Friend</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="expense_item">
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
+        <item>Snacks</item>
+        <item>Drinks</item>
+        <item>Cigarette</item>
+        <item>Clothes</item>
+        <item>Journey Cost</item>
+        <item>House Rent</item>
+        <item>Medicine</item>
+        <item>Study Material</item>
+        <item>Tuition Fees</item>
+        <item>Others</item>
+    </string-array>
+
     <string name="app_name">Pocketer Halchal</string>
     <string name="terms_condition">By clicking Sign Up, You agree to our <font color='#FF0000'>Terms &amp; Conditions</font> and that you have read our <font color='#FFE91E63'>Privacy Policy</font></string>
     <string name="sign_up">Dont have an account? <font color="#FF0000">Sign Up</font></string>

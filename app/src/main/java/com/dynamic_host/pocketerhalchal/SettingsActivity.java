@@ -1,5 +1,6 @@
 package com.dynamic_host.pocketerhalchal;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,12 +12,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.InputType;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.dynamic_host.pocketerhalchal.database.PocketContract;
 
 import java.io.IOException;
 
@@ -40,13 +46,11 @@ public class SettingsActivity extends AppCompatActivity {
         ivProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(SettingsActivity.this,"Add Photos from gallery",Toast.LENGTH_SHORT).show();
                 // making implicit intent to pick photo from external gallery
                 Intent gallery = new Intent();
                 gallery.setType("image/*");
                 gallery.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(gallery,"select picture"),PICK_IMAGE);
-
             }
         });
         tvUserName.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +116,6 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     // Picking photo from external storage
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -124,7 +127,41 @@ public class SettingsActivity extends AppCompatActivity {
             }catch (IOException e){
                 e.printStackTrace();
             }
-
         }
     }
-}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.change_password_menu,menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.activity_change_password, null);
+        EditText etOldPassword = dialogView.findViewById(R.id.etOldPassword);
+        EditText etNewPassword = dialogView.findViewById(R.id.etNewPassword);
+        EditText etConfirmPassword = dialogView.findViewById(R.id.etConfirmPassword);
+
+        AlertDialog.Builder ab = new AlertDialog.Builder(SettingsActivity.this);
+        ab.setTitle("Change Password");
+
+        //Setting positive "Save" Button
+        ab.setPositiveButton("Update",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+                        Toast.makeText(SettingsActivity.this,"Password Changed!",Toast.LENGTH_SHORT).show();
+                    }
+                });
+        //Setting Negative "Cancel" Button
+        ab.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // Write your code here to execute after dialog
+                dialog.cancel();
+            }
+        });
+        ab.setView(dialogView);
+        ab.show();
+        //getContentResolver().delete(PocketContract.ExpenseEntry.CONTENT_EXPENSE_URI, null, null);
+        return super.onOptionsItemSelected(item);
+        }
+    }

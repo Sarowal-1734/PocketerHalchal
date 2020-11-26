@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,9 +27,9 @@ import com.dynamic_host.pocketerhalchal.database.PocketContract.IncomeEntry;
 
 import java.util.Calendar;
 
-public class IncomeActivity extends AppCompatActivity {
+public class IncomeEditorActivity extends AppCompatActivity {
 
-    private Button btSubmit;
+    private Button btUpdate;
     private EditText etIncome, etDescription;
     private Spinner spSource;
     private DatePickerDialog.OnDateSetListener myDateSetLister;
@@ -38,12 +41,31 @@ public class IncomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_income);
 
-        btSubmit = findViewById(R.id.btSubmit);
+        btUpdate = findViewById(R.id.btSubmit);
         etIncome = findViewById(R.id.etIncome);
         tvSource = findViewById(R.id.tvSource);
         tvDate = findViewById(R.id.tvDate);
         etDescription = findViewById(R.id.etDescription);
         spSource = findViewById(R.id.spSource);
+
+        Intent intent = getIntent();
+        Uri uri = intent.getData();
+        String[] projection = {
+                IncomeEntry.INCOME_ID,
+                IncomeEntry.COLUMN_INCOME_AMOUNT,
+                IncomeEntry.COLUMN_INCOME_SOURCE,
+                IncomeEntry.COLUMN_INCOME_DATE,
+                IncomeEntry.COLUMN_INCOME_DESCRIPTION
+        };
+        Cursor cursor = getContentResolver().query(uri,projection,null,null,null);
+        int amountColumnIndex = cursor.getColumnIndex(IncomeEntry.COLUMN_INCOME_AMOUNT);
+        int descriptionColumnIndex = cursor.getColumnIndex(IncomeEntry.COLUMN_INCOME_DESCRIPTION);
+        if(cursor.moveToNext())
+        {
+            etIncome.setText(cursor.getString(amountColumnIndex));
+            etDescription.setText(cursor.getString(descriptionColumnIndex));
+            //tvDate.setText(cursor.getString(dateColumnIndex));
+        }
 
         setupSpinner();
 
@@ -55,7 +77,7 @@ public class IncomeActivity extends AppCompatActivity {
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dialog = new DatePickerDialog(IncomeActivity.this,
+                DatePickerDialog dialog = new DatePickerDialog(IncomeEditorActivity.this,
                         android.R.style.Theme_Holo_Dialog_NoActionBar_MinWidth,
                         myDateSetLister,year,month,day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -72,27 +94,33 @@ public class IncomeActivity extends AppCompatActivity {
         };
 
 
-        btSubmit.setOnClickListener(new View.OnClickListener() {
+        btUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String incomeAmount = etIncome.getText().toString().trim();
+                if(incomeDate == null)
+                {
+                    Toast.makeText(IncomeEditorActivity.this,"Date Can't be null",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    String incomeAmount = etIncome.getText().toString().trim();
                 String incomeDescription = etDescription.getText().toString().trim();
                 ContentValues values = new ContentValues();
                 values.put(IncomeEntry.COLUMN_INCOME_AMOUNT,incomeAmount);
                 values.put(IncomeEntry.COLUMN_INCOME_SOURCE,incomeSource);
                 values.put(IncomeEntry.COLUMN_INCOME_DATE,incomeDate);
                 values.put(IncomeEntry.COLUMN_INCOME_DESCRIPTION,incomeDescription);
-                Uri newUri = getContentResolver().insert(IncomeEntry.CONTENT_INCOME_URI,values);
-                if (newUri == null)
-                    Toast.makeText(IncomeActivity.this, "Error with saving data!", Toast.LENGTH_SHORT).show();
+                int newRow = getContentResolver().update(uri,values,null,null);
+                if(newRow!=0)
+                    Toast.makeText(IncomeEditorActivity.this,"Update Successful",Toast.LENGTH_SHORT).show();
                 else
-                    Toast.makeText(IncomeActivity.this, "New Income Data Saved!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(IncomeEditorActivity.this,"Update Fail",Toast.LENGTH_SHORT).show();
                 finish();
+                }
             }
         });
     }
     private void setupSpinner() {
-        ArrayAdapter incomeSourceAdapter = ArrayAdapter.createFromResource(IncomeActivity.this, R.array.income_source, R.layout.spinner_item);
+        ArrayAdapter incomeSourceAdapter = ArrayAdapter.createFromResource(IncomeEditorActivity.this, R.array.income_source, R.layout.spinner_item);
         incomeSourceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spSource.setAdapter(incomeSourceAdapter);
 

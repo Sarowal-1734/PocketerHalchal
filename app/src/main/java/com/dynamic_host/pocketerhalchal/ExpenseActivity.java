@@ -2,10 +2,12 @@ package com.dynamic_host.pocketerhalchal;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.dynamic_host.pocketerhalchal.database.PocketContract.ExpenseEntry;
 import android.app.DatePickerDialog;
+import android.content.ContentValues;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +20,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dynamic_host.pocketerhalchal.database.PocketContract;
+
 import java.util.Calendar;
 
 public class ExpenseActivity extends AppCompatActivity {
@@ -26,6 +30,7 @@ public class ExpenseActivity extends AppCompatActivity {
     EditText etExpense, etDescription;
     Spinner spExpenseItem;
     TextView tvDate, tvItem;
+    String expenseItem, expenseDate;
     private DatePickerDialog.OnDateSetListener myDateSetLister;
 
     @Override
@@ -61,8 +66,8 @@ public class ExpenseActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month+1;
-                String date = dayOfMonth+"/"+month+"/"+year;
-                tvDate.setText(date);
+                expenseDate = dayOfMonth+"/"+month+"/"+year;
+                tvDate.setText(expenseDate);
             }
         };
 
@@ -71,7 +76,18 @@ public class ExpenseActivity extends AppCompatActivity {
         btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Expense Added Successfully", Toast.LENGTH_SHORT).show();
+                String expenseAmount = etExpense.getText().toString().trim();
+                String expenseDescription = etDescription.getText().toString().trim();
+                ContentValues values = new ContentValues();
+                values.put(ExpenseEntry.COLUMN_EXPENSE_AMOUNT,expenseAmount);
+                values.put(ExpenseEntry.COLUMN_EXPENSE_ITEM,expenseItem);
+                values.put(ExpenseEntry.COLUMN_EXPENSE_DATE,expenseDate);
+                values.put(ExpenseEntry.COLUMN_EXPENSE_DESCRIPTION,expenseDescription);
+                Uri newUri = getContentResolver().insert(ExpenseEntry.CONTENT_EXPENSE_URI,values);
+                if (newUri == null)
+                    Toast.makeText(ExpenseActivity.this, "Error with saving data!", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(ExpenseActivity.this, "New Expense Data Saved!", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -85,7 +101,7 @@ public class ExpenseActivity extends AppCompatActivity {
         spExpenseItem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selection = (String) parent.getItemAtPosition(position);
+                expenseItem = (String) parent.getItemAtPosition(position);
                 //tvSource.setText("Source: "+selection);
             }
 

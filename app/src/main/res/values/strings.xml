@@ -56,4 +56,13 @@
     <string name="dark">Dark</string>
     <string name="english">English</string>
     <string name="light">Light</string>
+    <string name="income">Income</string>
+    <string name="expense">Expense</string>
+    <string name="filter_by">Filter By:</string>
+    <string name="update">Update</string>
+    <string name="delete_all">Delete All</string>
+    <string name="change_password">Change Password</string>
+    <string name="old_password">Old Password:</string>
+    <string name="enter_new_password">Enter New Password:</string>
+    <string name="re_enter_password">Re-Enter Password</string>
 </resources>

@@ -173,17 +173,27 @@ public class ReportActivity extends AppCompatActivity{
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (cbIncome.isChecked()){
-            getContentResolver().delete(IncomeEntry.CONTENT_INCOME_URI, null, null);
-            Toast.makeText(ReportActivity.this, "All Income Deleted!", Toast.LENGTH_SHORT).show();
-            display();
-            return super.onOptionsItemSelected(item);
+        switch (item.getItemId())
+        {
+            case R.id.deleteAll:
+            {
+                if(cbIncome.isChecked()){
+                    getContentResolver().delete(IncomeEntry.CONTENT_INCOME_URI, null, null);
+                    Toast.makeText(ReportActivity.this, "All Income Deleted!", Toast.LENGTH_SHORT).show();
+                    display();
+                    break;
+                }
+                else if(cbExpense.isChecked()){
+                    getContentResolver().delete(ExpenseEntry.CONTENT_EXPENSE_URI, null, null);
+                    Toast.makeText(ReportActivity.this, "All Expense Deleted!", Toast.LENGTH_SHORT).show();
+                    display();
+                    break;
+                }
+                else
+                    Toast.makeText(ReportActivity.this,"Select Income/Expense First",Toast.LENGTH_SHORT).show();
+            }
+            default:
         }
-        else {
-            getContentResolver().delete(ExpenseEntry.CONTENT_EXPENSE_URI, null, null);
-            Toast.makeText(ReportActivity.this, "All Expense Deleted!", Toast.LENGTH_SHORT).show();
-            display();
-            return super.onOptionsItemSelected(item);
-        }
+        return super.onOptionsItemSelected(item);
     }
 }

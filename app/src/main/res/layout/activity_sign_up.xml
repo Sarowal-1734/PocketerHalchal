@@ -49,22 +49,6 @@
             android:background="@drawable/edittext_design"
             android:autofillHints="@string/username" />
         <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:layout_marginBottom="10dp"
-            android:drawableStart="@drawable/ic_mail"
-            android:drawablePadding="10dp"
-            android:hint="@string/email"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:inputType="textEmailAddress"
-            android:background="@drawable/edittext_design"
-            android:autofillHints="@string/email" />
-        <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="0dp"

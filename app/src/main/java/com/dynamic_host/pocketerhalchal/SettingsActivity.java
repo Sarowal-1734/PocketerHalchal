@@ -153,27 +153,31 @@ public class SettingsActivity extends AppCompatActivity {
         EditText etOldPassword = dialogView.findViewById(R.id.etOldPassword);
         EditText etNewPassword = dialogView.findViewById(R.id.etNewPassword);
         EditText etConfirmPassword = dialogView.findViewById(R.id.etConfirmPassword);
+        switch (item.getItemId())
+        {
+            case R.id.changePassword:
+                AlertDialog.Builder ab = new AlertDialog.Builder(SettingsActivity.this);
+                ab.setTitle("Change Password");
 
-        AlertDialog.Builder ab = new AlertDialog.Builder(SettingsActivity.this);
-        ab.setTitle("Change Password");
-
-        //Setting positive "Save" Button
-        ab.setPositiveButton("Update",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int which) {
-                        Toast.makeText(SettingsActivity.this,"Password Changed!",Toast.LENGTH_SHORT).show();
+                //Setting positive "Save" Button
+                ab.setPositiveButton("Update",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int which) {
+                                Toast.makeText(SettingsActivity.this,"Password Changed!",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                //Setting Negative "Cancel" Button
+                ab.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Write your code here to execute after dialog
+                        dialog.cancel();
                     }
                 });
-        //Setting Negative "Cancel" Button
-        ab.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                // Write your code here to execute after dialog
-                dialog.cancel();
-            }
-        });
-        ab.setView(dialogView);
-        ab.show();
-        //getContentResolver().delete(PocketContract.ExpenseEntry.CONTENT_EXPENSE_URI, null, null);
+                ab.setView(dialogView);
+                ab.show();
+                break;
+
+        }
         return super.onOptionsItemSelected(item);
     }
 }

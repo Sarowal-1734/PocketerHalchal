@@ -19,6 +19,7 @@ public class SignInActivity extends AppCompatActivity {
     EditText etUserMail, etPassword;
     Button btSignIn;
     TextView tvSignUp, tvForgotPassword;
+    public String userName, userMail, userPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +36,8 @@ public class SignInActivity extends AppCompatActivity {
         btSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userMail = etUserMail.getText().toString().trim();
-                String userPassword = etPassword.getText().toString().trim();
+                userMail = etUserMail.getText().toString().trim();
+                userPassword = etPassword.getText().toString().trim();
                 String[] signUpProjection = {SignUpEntry.SIGNUP_ID,
                         SignUpEntry.COLUMN_SIGNUP_EMAIL,
                         SignUpEntry.COLUMN_SIGNUP_PASSWORD};
@@ -48,6 +49,7 @@ public class SignInActivity extends AppCompatActivity {
                     int userPasswordColumnIndex = signUpCursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_PASSWORD);
                     if (userMail.equals(signUpCursor.getString(userMailColumnIndex)) && userPassword.equals(signUpCursor.getString(userPasswordColumnIndex))){
                         flag = 1;
+                        PocketContract.CURSOR_POSITION = signUpCursor.getPosition();
                         Toast.makeText(SignInActivity.this,"Welcome to Pocketer Halchal!",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                         startActivity(intent);

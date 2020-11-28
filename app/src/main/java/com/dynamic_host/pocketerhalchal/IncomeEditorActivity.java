@@ -64,7 +64,6 @@ public class IncomeEditorActivity extends AppCompatActivity {
         {
             etIncome.setText(cursor.getString(amountColumnIndex));
             etDescription.setText(cursor.getString(descriptionColumnIndex));
-            //tvDate.setText(cursor.getString(dateColumnIndex));
         }
 
         setupSpinner();

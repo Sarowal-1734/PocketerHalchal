@@ -1,33 +1,20 @@
 package com.dynamic_host.pocketerhalchal;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
-
 import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.InputType;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.dynamic_host.pocketerhalchal.database.PocketContract;
 import com.dynamic_host.pocketerhalchal.database.PocketContract.IncomeEntry;
 import com.dynamic_host.pocketerhalchal.database.PocketContract.ExpenseEntry;
 import com.dynamic_host.pocketerhalchal.database.PocketCursorAdapter;
@@ -38,7 +25,6 @@ public class ReportActivity extends AppCompatActivity{
     ListView listView;
     String source, description, item;
     Uri uri;
-    PocketCursorAdapter ExpenseAdapter, incomeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

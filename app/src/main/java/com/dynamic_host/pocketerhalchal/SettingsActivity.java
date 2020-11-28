@@ -53,7 +53,7 @@ public class SettingsActivity extends AppCompatActivity {
                 Intent gallery = new Intent();
                 gallery.setType("image/*");
                 gallery.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(gallery,"select picture"),PICK_IMAGE);
+                startActivityForResult(gallery,PICK_IMAGE);
             }
         });
 
@@ -63,6 +63,7 @@ public class SettingsActivity extends AppCompatActivity {
         int userNameColumnIndex = cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_USERNAME);
         cursor.moveToPosition(PocketContract.CURSOR_POSITION);
         tvUserName.setText(cursor.getString(userNameColumnIndex));
+        cursor.close();
 
         tvUserName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,5 +175,5 @@ public class SettingsActivity extends AppCompatActivity {
         ab.show();
         //getContentResolver().delete(PocketContract.ExpenseEntry.CONTENT_EXPENSE_URI, null, null);
         return super.onOptionsItemSelected(item);
-        }
     }
+}

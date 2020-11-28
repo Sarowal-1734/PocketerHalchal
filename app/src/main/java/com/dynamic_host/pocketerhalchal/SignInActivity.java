@@ -16,38 +16,37 @@ import com.dynamic_host.pocketerhalchal.database.PocketContract.SignUpEntry;
 
 public class SignInActivity extends AppCompatActivity {
 
-    EditText etUserMail, etPassword;
+    EditText etUserName, etPassword;
     Button btSignIn;
-    TextView tvSignUp, tvForgotPassword;
-    public String userName, userMail, userPassword;
+    TextView tvSignUp;
+    public String userName, userPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        etUserMail = findViewById(R.id.etUserMail);
+        etUserName = findViewById(R.id.etUserName);
         etPassword = findViewById(R.id.etPassword);
         btSignIn = findViewById(R.id.btSignIn);
-        tvForgotPassword = findViewById(R.id.tvForgotPassword);
         tvSignUp = findViewById(R.id.tvSignUp);
 
 
         btSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userMail = etUserMail.getText().toString().trim();
+                userName = etUserName.getText().toString().trim();
                 userPassword = etPassword.getText().toString().trim();
                 String[] signUpProjection = {SignUpEntry.SIGNUP_ID,
-                        SignUpEntry.COLUMN_SIGNUP_EMAIL,
+                        SignUpEntry.COLUMN_SIGNUP_USERNAME,
                         SignUpEntry.COLUMN_SIGNUP_PASSWORD};
                 Cursor signUpCursor = getContentResolver().query(SignUpEntry.CONTENT_SIGNUP_URI, signUpProjection, null, null, null);
                 int flag = 0;
                 while (signUpCursor.moveToNext())
                 {
-                    int userMailColumnIndex = signUpCursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_EMAIL);
+                    int userNameColumnIndex = signUpCursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_USERNAME);
                     int userPasswordColumnIndex = signUpCursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_PASSWORD);
-                    if (userMail.equals(signUpCursor.getString(userMailColumnIndex)) && userPassword.equals(signUpCursor.getString(userPasswordColumnIndex))){
+                    if (userName.equals(signUpCursor.getString(userNameColumnIndex)) && userPassword.equals(signUpCursor.getString(userPasswordColumnIndex))){
                         flag = 1;
                         PocketContract.CURSOR_POSITION = signUpCursor.getPosition();
                         Toast.makeText(SignInActivity.this,"Welcome to Pocketer Halchal!",Toast.LENGTH_SHORT).show();
@@ -61,17 +60,10 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
 
-        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
+                Intent intent = new Intent(SignInActivity.this, SetPasswordActivity.class);
                 startActivity(intent);
             }
         });

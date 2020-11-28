@@ -20,7 +20,6 @@ public class PocketContract {
         public final static String SIGNUP_TABLE_NAME = "sign_up_table";
         public final static String SIGNUP_ID = BaseColumns._ID;
         public final static String COLUMN_SIGNUP_USERNAME = "User_Name";
-        public final static String COLUMN_SIGNUP_EMAIL = "User_Email";
         public final static String COLUMN_SIGNUP_PASSWORD = "User_Password";
     }
 

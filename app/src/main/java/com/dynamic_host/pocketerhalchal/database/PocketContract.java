@@ -10,6 +10,7 @@ public class PocketContract {
     public static final String PATH_SIGNUP = "sign_up_table";
     public static final String PATH_INCOME = "income_table";
     public static final String PATH_EXPENSE = "expense_table";
+    public static int CURSOR_POSITION = -1;
 
     public PocketContract() {}
 

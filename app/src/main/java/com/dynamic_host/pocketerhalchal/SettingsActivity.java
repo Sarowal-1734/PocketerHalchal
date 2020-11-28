@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dynamic_host.pocketerhalchal.database.PocketContract;
+import com.dynamic_host.pocketerhalchal.database.PocketContract.SignUpEntry;
 
 import java.io.IOException;
 
@@ -43,6 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
         btLogout = findViewById(R.id.btLogout);
         tvUserName = findViewById(R.id.tvUserName);
         ivProfilePic = findViewById(R.id.ivProfilePic);
+
         ivProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +56,14 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivityForResult(Intent.createChooser(gallery,"select picture"),PICK_IMAGE);
             }
         });
+
+        //setup userName from database
+        String[] projection = {SignUpEntry.COLUMN_SIGNUP_USERNAME};
+        Cursor cursor = getContentResolver().query(SignUpEntry.CONTENT_SIGNUP_URI,projection,null,null,null);
+        int userNameColumnIndex = cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_USERNAME);
+        cursor.moveToPosition(PocketContract.CURSOR_POSITION);
+        tvUserName.setText(cursor.getString(userNameColumnIndex));
+
         tvUserName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -154,6 +154,14 @@ public class PocketProvider extends ContentProvider {
         int rowUpdate;
         int match = sUriMatcher.match(uri);
         switch (match) {
+            case 10:
+                rowUpdate = db.update(SignUpEntry.SIGNUP_TABLE_NAME, values, selection, selectionArgs);
+                break;
+            case 11:
+                selection = SignUpEntry.SIGNUP_ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                rowUpdate = db.update(SignUpEntry.SIGNUP_TABLE_NAME, values, selection, selectionArgs);
+                break;
             case 100:
                 rowUpdate = db.update(IncomeEntry.INCOME_TABLE_NAME, values, selection, selectionArgs);
                 break;

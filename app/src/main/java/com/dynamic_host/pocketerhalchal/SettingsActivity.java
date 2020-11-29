@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -57,13 +59,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        //setup userName from database
-        String[] projection = {SignUpEntry.COLUMN_SIGNUP_USERNAME};
-        Cursor cursor = getContentResolver().query(SignUpEntry.CONTENT_SIGNUP_URI,projection,null,null,null);
-        int userNameColumnIndex = cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_USERNAME);
-        cursor.moveToPosition(PocketContract.CURSOR_POSITION);
-        tvUserName.setText(cursor.getString(userNameColumnIndex));
-        cursor.close();
+        displayUserName();
 
         tvUserName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,9 +77,13 @@ public class SettingsActivity extends AppCompatActivity {
                 ab.setPositiveButton("Save",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int which) {
-                                // Write your code here to execute after dialog
-                                tvUserName.setText(userName.getText().toString());
+                                ContentValues values = new ContentValues();
+                                values.put(SignUpEntry.COLUMN_SIGNUP_USERNAME,userName.getText().toString());
+                                //Setup Row Id
+                                Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,PocketContract.CURSOR_POSITION+1);
+                                getContentResolver().update(uri,values,null,null);
                                 Toast.makeText(SettingsActivity.this,"Saved",Toast.LENGTH_SHORT).show();
+                                displayUserName();
                             }
                         });
                 //Setting Negative "Cancel" Button
@@ -127,6 +127,16 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+    private void displayUserName() {
+        //setup userName from database
+        String[] projection = {SignUpEntry.COLUMN_SIGNUP_USERNAME};
+        Cursor cursor = getContentResolver().query(SignUpEntry.CONTENT_SIGNUP_URI,projection,null,null,null);
+        int userNameColumnIndex = cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_USERNAME);
+        cursor.moveToPosition(PocketContract.CURSOR_POSITION);
+        tvUserName.setText(cursor.getString(userNameColumnIndex));
+        cursor.close();
+    }
+
     // Picking photo from external storage
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -150,9 +160,6 @@ public class SettingsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.activity_change_password, null);
-        EditText etOldPassword = dialogView.findViewById(R.id.etOldPassword);
-        EditText etNewPassword = dialogView.findViewById(R.id.etNewPassword);
-        EditText etConfirmPassword = dialogView.findViewById(R.id.etConfirmPassword);
         switch (item.getItemId())
         {
             case R.id.changePassword:
@@ -163,7 +170,29 @@ public class SettingsActivity extends AppCompatActivity {
                 ab.setPositiveButton("Update",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int which) {
-                                Toast.makeText(SettingsActivity.this,"Password Changed!",Toast.LENGTH_SHORT).show();
+                                EditText OldPassword = dialogView.findViewById(R.id.etOldPassword);
+                                EditText NewPassword = dialogView.findViewById(R.id.etNewPassword);
+                                EditText ConfirmPassword = dialogView.findViewById(R.id.etConfirmPassword);
+                                String oldPassword = OldPassword.getText().toString();
+                                String newPassword = NewPassword.getText().toString();
+                                String confirmPassword = ConfirmPassword.getText().toString();
+
+                                //Checking Old Password
+                                String[] projection = {SignUpEntry.COLUMN_SIGNUP_PASSWORD};
+                                Cursor cursor = getContentResolver().query(SignUpEntry.CONTENT_SIGNUP_URI,projection,null,null,null);
+                                int userPassColumnIndex = cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_PASSWORD);
+                                cursor.moveToPosition(PocketContract.CURSOR_POSITION);
+                                if(oldPassword.equals(cursor.getString(userPassColumnIndex)) && newPassword.equals(confirmPassword)){
+                                    ContentValues values = new ContentValues();
+                                    values.put(SignUpEntry.COLUMN_SIGNUP_PASSWORD,newPassword);
+                                    //Setup Row Id
+                                    Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,PocketContract.CURSOR_POSITION+1);
+                                    getContentResolver().update(uri,values,null,null);
+                                    Toast.makeText(SettingsActivity.this,"Password Changed!",Toast.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    Toast.makeText(SettingsActivity.this,"Password Doesn't Match!",Toast.LENGTH_SHORT).show();
+                                }
                             }
                         });
                 //Setting Negative "Cancel" Button

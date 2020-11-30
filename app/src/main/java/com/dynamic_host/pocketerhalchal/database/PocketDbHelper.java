@@ -22,7 +22,8 @@ public class PocketDbHelper extends SQLiteOpenHelper {
         String SQL_CREATE_SIGNUP_TABLE = "CREATE TABLE "+ SignUpEntry.SIGNUP_TABLE_NAME +
                 " ("+SignUpEntry._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 SignUpEntry.COLUMN_SIGNUP_USERNAME+" TEXT, "+
-                SignUpEntry.COLUMN_SIGNUP_PASSWORD+" TEXT);";
+                SignUpEntry.COLUMN_SIGNUP_PASSWORD+" TEXT, "+
+                SignUpEntry.COLUMN_SIGNUP_IMAGE+" BLOB);";
         db.execSQL(SQL_CREATE_SIGNUP_TABLE);
 
         String SQL_CREATE_INCOME_TABLE = "CREATE TABLE "+ IncomeEntry.INCOME_TABLE_NAME+

@@ -15,8 +15,8 @@
             android:text="Date"
             android:textSize="16sp"
             android:paddingLeft="5dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:textColor="@color/white"
             android:gravity="center|left"/>
         <TextView
@@ -28,8 +28,8 @@
             android:textSize="16sp"
             android:layout_marginLeft="1dp"
             android:paddingLeft="5dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:textColor="@color/white"
             android:gravity="center|left"/>
         <TextView
@@ -39,8 +39,8 @@
             android:layout_weight="1"
             android:text="Amount"
             android:paddingLeft="5dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:textSize="16sp"
             android:textColor="@color/white"
             android:layout_marginLeft="1dp"

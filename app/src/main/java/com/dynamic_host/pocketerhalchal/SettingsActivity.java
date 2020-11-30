@@ -137,7 +137,7 @@ public class SettingsActivity extends AppCompatActivity {
         String[] projection = {SignUpEntry.COLUMN_SIGNUP_USERNAME};
         Cursor cursor = getContentResolver().query(SignUpEntry.CONTENT_SIGNUP_URI,projection,null,null,null);
         int userNameColumnIndex = cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_USERNAME);
-        cursor.moveToPosition(PocketContract.CURSOR_POSITION);
+        cursor.moveToPosition(0);
         tvUserName.setText(cursor.getString(userNameColumnIndex));
         cursor.close();
     }
@@ -171,7 +171,7 @@ public class SettingsActivity extends AppCompatActivity {
         String[] projection = {SignUpEntry.COLUMN_SIGNUP_IMAGE};
         Cursor cursor = getContentResolver().query(SignUpEntry.CONTENT_SIGNUP_URI,projection,null,null,null);
         int userImageColumnIndex = cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_IMAGE);
-        cursor.moveToPosition(PocketContract.CURSOR_POSITION);
+        cursor.moveToPosition(0);
         byte[] imageByte = cursor.getBlob(userImageColumnIndex);
         if (imageByte != null){
             Bitmap bt = BitmapFactory.decodeByteArray(imageByte,0,imageByte.length);
@@ -195,35 +195,33 @@ public class SettingsActivity extends AppCompatActivity {
                 AlertDialog.Builder ab = new AlertDialog.Builder(SettingsActivity.this);
                 ab.setTitle("Change Password");
 
-                //Setting positive "Save" Button
-                ab.setPositiveButton("Update",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int which) {
-                                EditText OldPassword = dialogView.findViewById(R.id.etOldPassword);
-                                EditText NewPassword = dialogView.findViewById(R.id.etNewPassword);
-                                EditText ConfirmPassword = dialogView.findViewById(R.id.etConfirmPassword);
-                                String oldPassword = OldPassword.getText().toString();
-                                String newPassword = NewPassword.getText().toString();
-                                String confirmPassword = ConfirmPassword.getText().toString();
-
-                                //Checking Old Password
-                                String[] projection = {SignUpEntry.COLUMN_SIGNUP_PASSWORD};
-                                Cursor cursor = getContentResolver().query(SignUpEntry.CONTENT_SIGNUP_URI,projection,null,null,null);
-                                int userPassColumnIndex = cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_PASSWORD);
-                                cursor.moveToPosition(PocketContract.CURSOR_POSITION);
-                                if(oldPassword.equals(cursor.getString(userPassColumnIndex)) && newPassword.equals(confirmPassword)){
-                                    ContentValues values = new ContentValues();
-                                    values.put(SignUpEntry.COLUMN_SIGNUP_PASSWORD,newPassword);
-                                    //Setup Row Id
-                                    Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,PocketContract.CURSOR_POSITION+1);
-                                    getContentResolver().update(uri,values,null,null);
-                                    Toast.makeText(SettingsActivity.this,"Password Changed!",Toast.LENGTH_SHORT).show();
-                                }
-                                else{
-                                    Toast.makeText(SettingsActivity.this,"Password Doesn't Match!",Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                //Setting positive "Update" Button
+                ab.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+                        EditText OldPassword = dialogView.findViewById(R.id.etOldPassword);
+                        EditText NewPassword = dialogView.findViewById(R.id.etNewPassword);
+                        EditText ConfirmPassword = dialogView.findViewById(R.id.etConfirmPassword);
+                        String oldPassword = OldPassword.getText().toString();
+                        String newPassword = NewPassword.getText().toString();
+                        String confirmPassword = ConfirmPassword.getText().toString();
+                        //Checking Old Password
+                        String[] projection = {SignUpEntry.COLUMN_SIGNUP_PASSWORD};
+                        Cursor cursor = getContentResolver().query(SignUpEntry.CONTENT_SIGNUP_URI,projection,null,null,null);
+                        int userPassColumnIndex = cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_PASSWORD);
+                        cursor.moveToPosition(PocketContract.CURSOR_POSITION);
+                        if(oldPassword.equals(cursor.getString(userPassColumnIndex)) && newPassword.equals(confirmPassword)){
+                            ContentValues values = new ContentValues();
+                            values.put(SignUpEntry.COLUMN_SIGNUP_PASSWORD,newPassword);
+                            //Setup Row Id
+                            Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,PocketContract.CURSOR_POSITION+1);
+                            getContentResolver().update(uri,values,null,null);
+                            Toast.makeText(SettingsActivity.this,"Password Changed!",Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(SettingsActivity.this,"Password Doesn't Match!",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
                 //Setting Negative "Cancel" Button
                 ab.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -235,6 +233,33 @@ public class SettingsActivity extends AppCompatActivity {
                 ab.show();
                 break;
 
+            case R.id.setupLoginPin:
+                ab = new AlertDialog.Builder(SettingsActivity.this);
+                ab.setTitle("Setup Login Pin");
+                //Setting positive "Update" Button
+                ab.setPositiveButton("Enable", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+                        ContentValues values = new ContentValues();
+                        values.put(SignUpEntry.COLUMN_SIGNUP_LOGINPIN,1);
+                        //Setup Row Id
+                        Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,1);
+                        getContentResolver().update(uri,values,null,null);
+                        Toast.makeText(SettingsActivity.this,"Login Pin Enabled!",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                //Setting Negative "Cancel" Button
+                ab.setNegativeButton("Disable", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        ContentValues contentValues = new ContentValues();
+                        contentValues.put(SignUpEntry.COLUMN_SIGNUP_LOGINPIN,0);
+                        //Setup Row Id
+                        Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,1);
+                        getContentResolver().update(uri,contentValues,null,null);
+                        Toast.makeText(SettingsActivity.this,"Login Pin Disabled!",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                ab.show();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

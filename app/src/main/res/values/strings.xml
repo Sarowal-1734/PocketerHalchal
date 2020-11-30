@@ -39,12 +39,12 @@
     <string name="add_expense_amount">Add Expense Amount:</string>
     <string name="expense_item">Expense Item:</string>
     <string name="username">Username:</string>
-    <string name="password">Password:</string>
+    <string name="password">Pin:</string>
     <string name="sign_in">Sign In</string>
     <string name="connect_with_facebook">Connect With Facebook</string>
     <string name="welcome">Welcome!</string>
     <string name="email">Email:</string>
-    <string name="retype_password">Retype Password:</string>
+    <string name="retype_password">Retype Pin:</string>
     <string name="sign_up_button">Sign Up</string>
     <string name="date">Date</string>
     <string name="item">Item</string>
@@ -59,10 +59,11 @@
     <string name="income">Income</string>
     <string name="expense">Expense</string>
     <string name="filter_by">Filter By:</string>
-    <string name="update">Update</string>
+    <string name="update">Enable</string>
     <string name="delete_all">Delete All</string>
-    <string name="change_password">Change Password</string>
-    <string name="old_password">Old Password:</string>
-    <string name="enter_new_password">Enter New Password:</string>
-    <string name="re_enter_password">Re-Enter Password</string>
+    <string name="change_password">Change Pin</string>
+    <string name="old_password">Enter Old Pin:</string>
+    <string name="enter_new_password">Enter New Pin:</string>
+    <string name="re_enter_password">Re-Enter New Pin</string>
+    <string name="setup_login_pin">Setup Login Pin</string>
 </resources>

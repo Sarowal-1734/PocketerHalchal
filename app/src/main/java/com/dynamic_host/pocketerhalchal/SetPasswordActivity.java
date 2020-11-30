@@ -3,6 +3,8 @@ package com.dynamic_host.pocketerhalchal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -35,11 +37,14 @@ public class SetPasswordActivity extends AppCompatActivity {
                 ContentValues values = new ContentValues();
                 values.put(SignUpEntry.COLUMN_SIGNUP_USERNAME,userName);
                 values.put(SignUpEntry.COLUMN_SIGNUP_PASSWORD,userPassword);
+                values.put(SignUpEntry.COLUMN_SIGNUP_LOGINPIN,1);
                 Uri newUri = getContentResolver().insert(SignUpEntry.CONTENT_SIGNUP_URI,values);
                 if (newUri == null)
                     Toast.makeText(SetPasswordActivity.this, "Registration Failed! Try Again.", Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(SetPasswordActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SetPasswordActivity.this,SignInActivity.class);
+                startActivity(intent);
                 finish();
             }
         });

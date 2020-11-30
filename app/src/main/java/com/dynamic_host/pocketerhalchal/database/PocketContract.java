@@ -22,6 +22,7 @@ public class PocketContract {
         public final static String COLUMN_SIGNUP_USERNAME = "User_Name";
         public final static String COLUMN_SIGNUP_PASSWORD = "User_Password";
         public final static String COLUMN_SIGNUP_IMAGE = "User_Photo";
+        public final static String COLUMN_SIGNUP_LOGINPIN = "Login_Pin";
     }
 
     public static final class IncomeEntry implements BaseColumns {

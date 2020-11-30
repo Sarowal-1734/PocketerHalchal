@@ -38,7 +38,6 @@
         <activity
             android:name=".SetPasswordActivity"
             android:label="Sign Up"
-            android:parentActivityName=".SignInActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ExpenseActivity"

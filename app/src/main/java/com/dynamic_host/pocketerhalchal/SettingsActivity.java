@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -28,17 +29,22 @@ import android.widget.Toast;
 import com.dynamic_host.pocketerhalchal.database.PocketContract;
 import com.dynamic_host.pocketerhalchal.database.PocketContract.SignUpEntry;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    Button btLogout;
-    TextView tvUserName;
-    CircleImageView ivProfilePic;
+    private Button btLogout;
+    private TextView tvUserName;
+    private CircleImageView ivProfilePic;
     private static final int PICK_IMAGE = 1;
-    Uri imageUri;
+    private Uri imageUri;
+    private Bitmap bitmap;
+    private ByteArrayOutputStream byteArrayOutputStream;
+    private byte[] imageInBytes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +53,9 @@ public class SettingsActivity extends AppCompatActivity {
         btLogout = findViewById(R.id.btLogout);
         tvUserName = findViewById(R.id.tvUserName);
         ivProfilePic = findViewById(R.id.ivProfilePic);
+
+        displayUserPhoto();
+        displayUserName();
 
         ivProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,9 +67,6 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivityForResult(gallery,PICK_IMAGE);
             }
         });
-
-        displayUserName();
-
         tvUserName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,9 +132,8 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
-
+    //Setup userName From Database
     private void displayUserName() {
-        //setup userName from database
         String[] projection = {SignUpEntry.COLUMN_SIGNUP_USERNAME};
         Cursor cursor = getContentResolver().query(SignUpEntry.CONTENT_SIGNUP_URI,projection,null,null,null);
         int userNameColumnIndex = cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_USERNAME);
@@ -144,13 +149,37 @@ public class SettingsActivity extends AppCompatActivity {
         if(requestCode == PICK_IMAGE && resultCode == RESULT_OK){
             imageUri = data.getData();
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
-                ivProfilePic.setImageBitmap(bitmap);
+                //Update Image to Database
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
+                byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
+                imageInBytes = byteArrayOutputStream.toByteArray();
+                ContentValues values = new ContentValues();
+                values.put(SignUpEntry.COLUMN_SIGNUP_IMAGE,imageInBytes);
+                Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,PocketContract.CURSOR_POSITION+1);
+                long id = getContentResolver().update(uri,values,null,null);
+                if (id!= -1)
+                    Toast.makeText(SettingsActivity.this,"Image Update Successful!",Toast.LENGTH_SHORT).show();
+                displayUserPhoto();
             }catch (IOException e){
                 e.printStackTrace();
             }
         }
     }
+    //Setup userImage From Database
+    private void displayUserPhoto() {
+        String[] projection = {SignUpEntry.COLUMN_SIGNUP_IMAGE};
+        Cursor cursor = getContentResolver().query(SignUpEntry.CONTENT_SIGNUP_URI,projection,null,null,null);
+        int userImageColumnIndex = cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_IMAGE);
+        cursor.moveToPosition(PocketContract.CURSOR_POSITION);
+        byte[] imageByte = cursor.getBlob(userImageColumnIndex);
+        if (imageByte != null){
+            Bitmap bt = BitmapFactory.decodeByteArray(imageByte,0,imageByte.length);
+            ivProfilePic.setImageBitmap(bt);
+            cursor.close();
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.change_password_menu,menu);

@@ -3,6 +3,7 @@ package com.dynamic_host.pocketerhalchal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btIncome, btExpense, btReport, btSettings;
     PieChart pieChart;
+    int totalIncome, totalExpense, income, expense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
         btExpense = findViewById(R.id.btExpense);
         btReport = findViewById(R.id.btReport);
         btSettings = findViewById(R.id.btSettings);
-
-        setupPieChart();
 
         btIncome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +68,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    //Calculate Total Income & Expense For PieChartSpinner
+    private void getTotalIncomeExpense() {
+        String[] incomeProjection = {PocketContract.IncomeEntry.COLUMN_INCOME_AMOUNT};
+        String[] expenseProjection = {PocketContract.ExpenseEntry.COLUMN_EXPENSE_AMOUNT};
+        Cursor cursorIncome = getContentResolver().query(PocketContract.IncomeEntry.CONTENT_INCOME_URI, incomeProjection, null, null, null);
+        Cursor cursorExpense = getContentResolver().query(PocketContract.ExpenseEntry.CONTENT_EXPENSE_URI, expenseProjection, null, null, null);
+        int userIncomeColumnIndex = cursorIncome.getColumnIndex(PocketContract.IncomeEntry.COLUMN_INCOME_AMOUNT);
+        int userExpenseColumnIndex = cursorExpense.getColumnIndex(PocketContract.ExpenseEntry.COLUMN_EXPENSE_AMOUNT);
+        totalIncome = 0;
+        totalExpense = 0;
+        while (cursorIncome.moveToNext())
+        {
+            income = Integer.parseInt(cursorIncome.getString(userIncomeColumnIndex));
+            totalIncome+=income;
+        }
+        while (cursorExpense.moveToNext())
+        {
+            expense = Integer.parseInt(cursorExpense.getString(userExpenseColumnIndex));
+            totalExpense+=expense;
+        }
+    }
+
     private void setupPieChart() {
         pieChart.animateXY(1000,1000);
         pieChart.setDrawEntryLabels(false);
@@ -92,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
         l.setTextColor(Color.WHITE);
 
         ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(25000, "Income"));
-        entries.add(new PieEntry(18000, "Expense"));
+        entries.add(new PieEntry(totalIncome, "Income"));
+        entries.add(new PieEntry(totalExpense, "Expense"));
 
         PieDataSet dataSet = new PieDataSet(entries,"");
         dataSet.setSliceSpace(0.5f);
@@ -106,5 +128,12 @@ public class MainActivity extends AppCompatActivity {
         PieData data = new PieData(dataSet);
         pieChart.setData(data);
         pieChart.invalidate();  //refresh
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getTotalIncomeExpense();
+        setupPieChart();
     }
 }

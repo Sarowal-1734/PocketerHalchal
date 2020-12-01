@@ -36,7 +36,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private Button btLogout;
     private TextView tvUserName;
     private CircleImageView ivProfilePic;
     private static final int PICK_IMAGE = 1;
@@ -50,7 +49,6 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        btLogout = findViewById(R.id.btLogout);
         tvUserName = findViewById(R.id.tvUserName);
         ivProfilePic = findViewById(R.id.ivProfilePic);
 
@@ -102,35 +100,7 @@ public class SettingsActivity extends AppCompatActivity {
                 ab.show();
             }
         });
-
-        btLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
-                AlertDialog alertDialog;
-                builder.setMessage("Do you want to logout?");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                        Toast.makeText(SettingsActivity.this,"Logging Out",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(SettingsActivity.this, SignInActivity.class);
-                        startActivity(intent);
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                        Toast.makeText(SettingsActivity.this,"Welcome Back",Toast.LENGTH_SHORT).show();
-                    }
-                });
-                // Creating Dialog
-                alertDialog = builder.create();
-                alertDialog.setTitle("Logout Alert");
-                alertDialog.show();
-            }
-        });
+        
     }
     //Setup userName From Database
     private void displayUserName() {
@@ -235,7 +205,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             case R.id.setupLoginPin:
                 ab = new AlertDialog.Builder(SettingsActivity.this);
-                ab.setTitle("Setup Login Pin");
+                ab.setTitle("App Lock");
                 //Setting positive "Update" Button
                 ab.setPositiveButton("Enable", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int which) {

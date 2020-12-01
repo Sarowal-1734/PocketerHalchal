@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -81,13 +82,17 @@ public class SettingsActivity extends AppCompatActivity {
                 ab.setPositiveButton("Save",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int which) {
-                                ContentValues values = new ContentValues();
-                                values.put(SignUpEntry.COLUMN_SIGNUP_USERNAME,userName.getText().toString());
-                                //Setup Row Id
-                                Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,PocketContract.CURSOR_POSITION+1);
-                                getContentResolver().update(uri,values,null,null);
-                                Toast.makeText(SettingsActivity.this,"Saved",Toast.LENGTH_SHORT).show();
-                                displayUserName();
+                                if (TextUtils.isEmpty(userName.getText().toString()))
+                                    Toast.makeText(SettingsActivity.this,"Username Can't be Empty",Toast.LENGTH_SHORT).show();
+                                else {
+                                    ContentValues values = new ContentValues();
+                                    values.put(SignUpEntry.COLUMN_SIGNUP_USERNAME,userName.getText().toString());
+                                    //Setup Row Id
+                                    Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,1);
+                                    getContentResolver().update(uri,values,null,null);
+                                    Toast.makeText(SettingsActivity.this,"Saved",Toast.LENGTH_SHORT).show();
+                                    displayUserName();
+                                }
                             }
                         });
                 //Setting Negative "Cancel" Button
@@ -126,7 +131,7 @@ public class SettingsActivity extends AppCompatActivity {
                 imageInBytes = byteArrayOutputStream.toByteArray();
                 ContentValues values = new ContentValues();
                 values.put(SignUpEntry.COLUMN_SIGNUP_IMAGE,imageInBytes);
-                Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,PocketContract.CURSOR_POSITION+1);
+                Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,1);
                 long id = getContentResolver().update(uri,values,null,null);
                 if (id!= -1)
                     Toast.makeText(SettingsActivity.this,"Image Update Successful!",Toast.LENGTH_SHORT).show();
@@ -174,21 +179,25 @@ public class SettingsActivity extends AppCompatActivity {
                         String oldPassword = OldPassword.getText().toString();
                         String newPassword = NewPassword.getText().toString();
                         String confirmPassword = ConfirmPassword.getText().toString();
-                        //Checking Old Password
-                        String[] projection = {SignUpEntry.COLUMN_SIGNUP_PASSWORD};
-                        Cursor cursor = getContentResolver().query(SignUpEntry.CONTENT_SIGNUP_URI,projection,null,null,null);
-                        int userPassColumnIndex = cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_PASSWORD);
-                        cursor.moveToPosition(PocketContract.CURSOR_POSITION);
-                        if(oldPassword.equals(cursor.getString(userPassColumnIndex)) && newPassword.equals(confirmPassword)){
-                            ContentValues values = new ContentValues();
-                            values.put(SignUpEntry.COLUMN_SIGNUP_PASSWORD,newPassword);
-                            //Setup Row Id
-                            Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,PocketContract.CURSOR_POSITION+1);
-                            getContentResolver().update(uri,values,null,null);
-                            Toast.makeText(SettingsActivity.this,"Password Changed!",Toast.LENGTH_SHORT).show();
-                        }
+                        if (TextUtils.isEmpty(oldPassword) || TextUtils.isEmpty(newPassword) || TextUtils.isEmpty(confirmPassword))
+                            Toast.makeText(SettingsActivity.this,"Opps! Failed to Update Pin!",Toast.LENGTH_SHORT).show();
                         else{
-                            Toast.makeText(SettingsActivity.this,"Password Doesn't Match!",Toast.LENGTH_SHORT).show();
+                            //Checking Old Password
+                            String[] projection = {SignUpEntry.COLUMN_SIGNUP_PASSWORD};
+                            Cursor cursor = getContentResolver().query(SignUpEntry.CONTENT_SIGNUP_URI,projection,null,null,null);
+                            int userPassColumnIndex = cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_PASSWORD);
+                            cursor.moveToPosition(PocketContract.CURSOR_POSITION);
+                            if(oldPassword.equals(cursor.getString(userPassColumnIndex)) && newPassword.equals(confirmPassword)){
+                                ContentValues values = new ContentValues();
+                                values.put(SignUpEntry.COLUMN_SIGNUP_PASSWORD,newPassword);
+                                //Setup Row Id
+                                Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,PocketContract.CURSOR_POSITION+1);
+                                getContentResolver().update(uri,values,null,null);
+                                Toast.makeText(SettingsActivity.this,"Password Changed!",Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Toast.makeText(SettingsActivity.this,"Password Doesn't Match!",Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 });
@@ -214,7 +223,7 @@ public class SettingsActivity extends AppCompatActivity {
                         //Setup Row Id
                         Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,1);
                         getContentResolver().update(uri,values,null,null);
-                        Toast.makeText(SettingsActivity.this,"Login Pin Enabled!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SettingsActivity.this,"App Lock Enabled!",Toast.LENGTH_SHORT).show();
                     }
                 });
                 //Setting Negative "Cancel" Button
@@ -225,7 +234,7 @@ public class SettingsActivity extends AppCompatActivity {
                         //Setup Row Id
                         Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,1);
                         getContentResolver().update(uri,contentValues,null,null);
-                        Toast.makeText(SettingsActivity.this,"Login Pin Disabled!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SettingsActivity.this,"App Lock Disabled!",Toast.LENGTH_SHORT).show();
                     }
                 });
                 ab.show();

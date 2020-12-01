@@ -12,6 +12,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -39,7 +40,7 @@ public class IncomeEditorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_income);
+        setContentView(R.layout.activity_editor_income);
 
         btUpdate = findViewById(R.id.btSubmit);
         etIncome = findViewById(R.id.etIncome);
@@ -96,24 +97,24 @@ public class IncomeEditorActivity extends AppCompatActivity {
         btUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(incomeDate == null)
-                {
-                    Toast.makeText(IncomeEditorActivity.this,"Date Can't be null",Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    String incomeAmount = etIncome.getText().toString().trim();
+                String incomeAmount = etIncome.getText().toString().trim();
                 String incomeDescription = etDescription.getText().toString().trim();
-                ContentValues values = new ContentValues();
-                values.put(IncomeEntry.COLUMN_INCOME_AMOUNT,incomeAmount);
-                values.put(IncomeEntry.COLUMN_INCOME_SOURCE,incomeSource);
-                values.put(IncomeEntry.COLUMN_INCOME_DATE,incomeDate);
-                values.put(IncomeEntry.COLUMN_INCOME_DESCRIPTION,incomeDescription);
-                int newRow = getContentResolver().update(uri,values,null,null);
-                if(newRow!=0)
-                    Toast.makeText(IncomeEditorActivity.this,"Update Successful",Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(IncomeEditorActivity.this,"Update Fail",Toast.LENGTH_SHORT).show();
-                finish();
+                if (TextUtils.isEmpty(incomeAmount))
+                    etIncome.setError("Enter Income Amount");
+                else if (TextUtils.isEmpty(incomeDate))
+                    tvDate.setError("Select Date");
+                else{
+                    ContentValues values = new ContentValues();
+                    values.put(IncomeEntry.COLUMN_INCOME_AMOUNT,incomeAmount);
+                    values.put(IncomeEntry.COLUMN_INCOME_SOURCE,incomeSource);
+                    values.put(IncomeEntry.COLUMN_INCOME_DATE,incomeDate);
+                    values.put(IncomeEntry.COLUMN_INCOME_DESCRIPTION,incomeDescription);
+                    int newRow = getContentResolver().update(uri,values,null,null);
+                    if(newRow!=0)
+                        Toast.makeText(IncomeEditorActivity.this,"Update Successful",Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(IncomeEditorActivity.this,"Update Fail",Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
         });

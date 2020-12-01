@@ -123,7 +123,6 @@ public class PocketProvider extends ContentProvider {
         switch (match) {
             case 100:
                 db.delete(IncomeEntry.INCOME_TABLE_NAME, selection, selectionArgs);
-                Toast.makeText(getContext(),"All Incomes Deleted", Toast.LENGTH_SHORT).show();
                 break;
             case 101:
                 selection = IncomeEntry.INCOME_ID + "=?";
@@ -133,7 +132,6 @@ public class PocketProvider extends ContentProvider {
                 break;
             case 200:
                 db.delete(ExpenseEntry.EXPENSE_TABLE_NAME, selection, selectionArgs);
-                Toast.makeText(getContext(),"All Incomes Deleted", Toast.LENGTH_SHORT).show();
                 break;
             case 201:
                 selection = ExpenseEntry.EXPENSE_ID + "=?";

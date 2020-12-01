@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,7 +25,7 @@ public class ReportActivity extends AppCompatActivity{
     CheckBox cbIncome;
     CheckBox cbExpense;
     ListView listView;
-    String source, description, item;
+    String source, incomeDescription, expenseDescription, item;
     Uri uri;
 
     @Override
@@ -54,9 +55,13 @@ public class ReportActivity extends AppCompatActivity{
                     if(cursor.moveToNext())
                     {
                         source = cursor.getString(sourceColumnIndex);
-                        description = cursor.getString(descriptionColumnIndex);
+                        incomeDescription = cursor.getString(descriptionColumnIndex);
                     }
-                    ab.setMessage("Source: "+source+"\nDescription: "+description);
+                    if (TextUtils.isEmpty(incomeDescription))
+                        ab.setMessage("Source: "+source);
+                    else
+                        ab.setMessage("Source: "+source+"\nDescription: "+incomeDescription);
+
                 }
                 else {
                     uri = ContentUris.withAppendedId(ExpenseEntry.CONTENT_EXPENSE_URI,id);
@@ -70,9 +75,12 @@ public class ReportActivity extends AppCompatActivity{
                     if(cursor.moveToNext())
                     {
                         item = cursor.getString(itemColumnIndex);
-                        description = cursor.getString(descriptionColumnIndex);
+                        expenseDescription = cursor.getString(descriptionColumnIndex);
                     }
-                    ab.setMessage("Item: "+item+"\nDescription: "+description);
+                    if (TextUtils.isEmpty(expenseDescription))
+                        ab.setMessage("Item: "+item);
+                    else
+                        ab.setMessage("Item: "+item+"\nDescription: "+expenseDescription);
                 }
 
                 //Setting positive "Save" Button
@@ -124,7 +132,7 @@ public class ReportActivity extends AppCompatActivity{
             PocketCursorAdapter incomeAdapter = new PocketCursorAdapter(this, incomeCursor, 1);
             listView.setAdapter(incomeAdapter);//Attach the adapter to the ListView
         }
-        else {
+        else if (cbExpense.isChecked()){
             String[] expenseProjection = {ExpenseEntry.EXPENSE_ID,
                     ExpenseEntry.COLUMN_EXPENSE_DATE,
                     ExpenseEntry.COLUMN_EXPENSE_ITEM,
@@ -164,23 +172,22 @@ public class ReportActivity extends AppCompatActivity{
         switch (item.getItemId())
         {
             case R.id.deleteAll:
-            {
                 if(cbIncome.isChecked()){
                     getContentResolver().delete(IncomeEntry.CONTENT_INCOME_URI, null, null);
-                    Toast.makeText(ReportActivity.this, "All Income Deleted!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ReportActivity.this, "All Incomes Deleted!", Toast.LENGTH_SHORT).show();
                     display();
                     break;
                 }
                 else if(cbExpense.isChecked()){
                     getContentResolver().delete(ExpenseEntry.CONTENT_EXPENSE_URI, null, null);
-                    Toast.makeText(ReportActivity.this, "All Expense Deleted!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ReportActivity.this, "All Expenses Deleted!", Toast.LENGTH_SHORT).show();
                     display();
                     break;
                 }
-                else
+                else {
                     Toast.makeText(ReportActivity.this,"Select Income/Expense First",Toast.LENGTH_SHORT).show();
-            }
-            default:
+                    break;
+                }
         }
         return super.onOptionsItemSelected(item);
     }

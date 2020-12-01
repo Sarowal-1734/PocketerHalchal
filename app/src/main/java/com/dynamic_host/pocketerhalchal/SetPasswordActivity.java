@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +22,7 @@ public class SetPasswordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_set_password);
 
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
@@ -34,18 +34,27 @@ public class SetPasswordActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String userName = etUsername.getText().toString().trim();
                 String userPassword = etPassword.getText().toString().trim();
-                ContentValues values = new ContentValues();
-                values.put(SignUpEntry.COLUMN_SIGNUP_USERNAME,userName);
-                values.put(SignUpEntry.COLUMN_SIGNUP_PASSWORD,userPassword);
-                values.put(SignUpEntry.COLUMN_SIGNUP_LOGINPIN,1);
-                Uri newUri = getContentResolver().insert(SignUpEntry.CONTENT_SIGNUP_URI,values);
-                if (newUri == null)
-                    Toast.makeText(SetPasswordActivity.this, "Registration Failed! Try Again.", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(SetPasswordActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SetPasswordActivity.this,SignInActivity.class);
-                startActivity(intent);
-                finish();
+                String userConfirmPassword = etRetypePassword.getText().toString().trim();
+                if (TextUtils.isEmpty(userName))
+                    etUsername.setError("User Name Can't be empty");
+                else if (TextUtils.isEmpty(userPassword))
+                    etPassword.setError("Password can't be empty");
+                else if (!userPassword.equals(userConfirmPassword))
+                    etRetypePassword.setError("Password doesn't match");
+                else {
+                    ContentValues values = new ContentValues();
+                    values.put(SignUpEntry.COLUMN_SIGNUP_USERNAME,userName);
+                    values.put(SignUpEntry.COLUMN_SIGNUP_PASSWORD,userPassword);
+                    values.put(SignUpEntry.COLUMN_SIGNUP_LOGINPIN,1);
+                    Uri newUri = getContentResolver().insert(SignUpEntry.CONTENT_SIGNUP_URI,values);
+                    if (newUri == null)
+                        Toast.makeText(SetPasswordActivity.this, "Registration Failed! Try Again.", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(SetPasswordActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(SetPasswordActivity.this,SignInActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 

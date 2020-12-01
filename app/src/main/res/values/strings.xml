@@ -34,7 +34,7 @@
     <string name="add_income_amount">Add Income Amount:</string>
     <string name="source">Source:</string>
     <string name="dd_mm_yyyy">DD/MM/YYYY</string>
-    <string name="description">Description:</string>
+    <string name="description">Description: (Optional)</string>
     <string name="submit">Submit</string>
     <string name="add_expense_amount">Add Expense Amount:</string>
     <string name="expense_item">Expense Item:</string>
@@ -66,4 +66,5 @@
     <string name="enter_new_password">Enter New Pin:</string>
     <string name="re_enter_password">Re-Enter New Pin</string>
     <string name="setup_login_pin">App Lock</string>
+    <string name="updateData">Update</string>
 </resources>

@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,8 +31,8 @@ public class IncomeActivity extends AppCompatActivity {
     private EditText etIncome, etDescription;
     private Spinner spSource;
     private DatePickerDialog.OnDateSetListener myDateSetLister;
-    private TextView tvDate, tvSource;
-    private String incomeSource, incomeDate;
+    private TextView tvDate;
+    private String incomeSource, incomeDate = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,6 @@ public class IncomeActivity extends AppCompatActivity {
 
         btSubmit = findViewById(R.id.btSubmit);
         etIncome = findViewById(R.id.etIncome);
-        tvSource = findViewById(R.id.tvSource);
         tvDate = findViewById(R.id.tvDate);
         etDescription = findViewById(R.id.etDescription);
         spSource = findViewById(R.id.spSource);
@@ -77,17 +77,23 @@ public class IncomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String incomeAmount = etIncome.getText().toString().trim();
                 String incomeDescription = etDescription.getText().toString().trim();
-                ContentValues values = new ContentValues();
-                values.put(IncomeEntry.COLUMN_INCOME_AMOUNT,incomeAmount);
-                values.put(IncomeEntry.COLUMN_INCOME_SOURCE,incomeSource);
-                values.put(IncomeEntry.COLUMN_INCOME_DATE,incomeDate);
-                values.put(IncomeEntry.COLUMN_INCOME_DESCRIPTION,incomeDescription);
-                Uri newUri = getContentResolver().insert(IncomeEntry.CONTENT_INCOME_URI,values);
-                if (newUri == null)
-                    Toast.makeText(IncomeActivity.this, "Error with saving data!", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(IncomeActivity.this, "New Income Data Saved!", Toast.LENGTH_SHORT).show();
-                finish();
+                if (TextUtils.isEmpty(incomeAmount))
+                    etIncome.setError("Enter Income Amount");
+                else if (TextUtils.isEmpty(incomeDate))
+                    tvDate.setError("Select Date");
+                else{
+                    ContentValues values = new ContentValues();
+                    values.put(IncomeEntry.COLUMN_INCOME_AMOUNT,incomeAmount);
+                    values.put(IncomeEntry.COLUMN_INCOME_SOURCE,incomeSource);
+                    values.put(IncomeEntry.COLUMN_INCOME_DATE,incomeDate);
+                    values.put(IncomeEntry.COLUMN_INCOME_DESCRIPTION,incomeDescription);
+                    Uri newUri = getContentResolver().insert(IncomeEntry.CONTENT_INCOME_URI,values);
+                    if (newUri == null)
+                        Toast.makeText(IncomeActivity.this, "Error with saving data!", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(IncomeActivity.this, "New Income Data Saved!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
         });
     }

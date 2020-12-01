@@ -12,6 +12,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -93,13 +94,14 @@ public class ExpenseEditorActivity extends AppCompatActivity {
         btUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(expenseDate == null)
-                {
-                    Toast.makeText(ExpenseEditorActivity.this,"Date Can't be null",Toast.LENGTH_SHORT).show();
-                }
+                String expenseAmount = etExpense.getText().toString().trim();
+                String expenseDescription = etDescription.getText().toString().trim();
+                if (TextUtils.isEmpty(expenseAmount))
+                    etExpense.setError("Enter Expense Amount");
+                else if (TextUtils.isEmpty(expenseDate))
+                    tvDate.setError("Select Date");
                 else{
-                    String expenseAmount = etExpense.getText().toString().trim();
-                    String expenseDescription = etDescription.getText().toString().trim();
+
                     ContentValues values = new ContentValues();
                     values.put(ExpenseEntry.COLUMN_EXPENSE_AMOUNT,expenseAmount);
                     values.put(ExpenseEntry.COLUMN_EXPENSE_ITEM,expenseItem);

@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="?attr/LayoutBackground"
-    tools:context=".MainActivity">
+    tools:context=".SettingsActivity">
 
     <LinearLayout
         android:layout_marginTop="20dp"

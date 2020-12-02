@@ -63,9 +63,7 @@ public class SettingsActivity extends AppCompatActivity {
         tvUserName = findViewById(R.id.tvUserName);
         ivProfilePic = findViewById(R.id.ivProfilePic);
 
-        displayUserPhoto();
-        displayUserName();
-        displaySwitches();
+
 
         //User Photo setup
         ivProfilePic.setOnClickListener(new View.OnClickListener() {
@@ -170,8 +168,16 @@ public class SettingsActivity extends AppCompatActivity {
         
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        displayUserPhoto();
+        displayUserName();
+        displaySwitches();
+
+    }
     private void restartApp() {
-        startActivity(new Intent(SettingsActivity.this,SettingsActivity.class));
+        startActivity(new Intent(this,SettingsActivity.class));
         finish();
     }
 

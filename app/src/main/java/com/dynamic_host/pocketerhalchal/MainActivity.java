@@ -27,6 +27,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Theme
+        String[] signUpProjection = {PocketContract.SignUpEntry.COLUMN_SIGNUP_THEME};
+        Cursor cursor = getContentResolver().query(PocketContract.SignUpEntry.CONTENT_SIGNUP_URI, signUpProjection, null, null, null);
+        cursor.moveToPosition(0);
+        PocketContract.CURRENT_THEME = cursor.getInt(cursor.getColumnIndex(PocketContract.SignUpEntry.COLUMN_SIGNUP_THEME));
+        if (PocketContract.CURRENT_THEME == 1)
+            setTheme(R.style.DarkTheme);
+        else setTheme(R.style.LightTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -91,27 +100,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupPieChart() {
+        Legend l = pieChart.getLegend();
+
         pieChart.animateXY(1000,1000);
         pieChart.setDrawEntryLabels(false);
         pieChart.setHoleRadius(40);
-        pieChart.setHoleColor(Color.BLACK);
+        //Theme
+        if (PocketContract.CURRENT_THEME == 1){
+            pieChart.setHoleColor(Color.BLACK);
+            pieChart.setCenterTextColor(Color.WHITE);
+            l.setTextColor(Color.WHITE);
+        }
+        else{
+            pieChart.setHoleColor(Color.WHITE);
+            pieChart.setCenterTextColor(Color.BLACK);
+            l.setTextColor(Color.BLACK);
+        }
+
         pieChart.setCenterText("Monthly\nReport");
         pieChart.setCenterTextSize(16);
-        pieChart.setCenterTextColor(Color.WHITE);
         pieChart.setTransparentCircleAlpha(90);
         pieChart.setTransparentCircleColor(Color.GRAY);
         pieChart.setTransparentCircleRadius(50);
         pieChart.setDragDecelerationFrictionCoef(0.99f);
         pieChart.getDescription().setEnabled(false);
 
-        Legend l = pieChart.getLegend();
+
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
         l.setWordWrapEnabled(true);
         l.setDrawInside(false);
         l.setTextSize(16f);
-        l.setTextColor(Color.WHITE);
 
         ArrayList<PieEntry> entries = new ArrayList<>();
         entries.add(new PieEntry(totalIncome, "Income"));

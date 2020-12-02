@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,11 +33,13 @@ import com.dynamic_host.pocketerhalchal.database.PocketContract.SignUpEntry;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingsActivity extends AppCompatActivity {
 
+    Switch swDarkMod, swAppLock;
     private TextView tvUserName;
     private CircleImageView ivProfilePic;
     private static final int PICK_IMAGE = 1;
@@ -47,15 +50,24 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Theme
+        if (PocketContract.CURRENT_THEME == 1)
+            setTheme(R.style.DarkTheme);
+        else setTheme(R.style.LightTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        swDarkMod = findViewById(R.id.swDarkMode);
+        swAppLock = findViewById(R.id.swAppLock);
         tvUserName = findViewById(R.id.tvUserName);
         ivProfilePic = findViewById(R.id.ivProfilePic);
 
         displayUserPhoto();
         displayUserName();
+        displaySwitches();
 
+        //User Photo setup
         ivProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +78,8 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivityForResult(gallery,PICK_IMAGE);
             }
         });
+
+        //Username setup
         tvUserName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,8 +119,75 @@ public class SettingsActivity extends AppCompatActivity {
                 ab.show();
             }
         });
+
+        //Dark Mode Setup
+        swDarkMod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (swDarkMod.isChecked()){
+                    ContentValues values = new ContentValues();
+                    values.put(SignUpEntry.COLUMN_SIGNUP_THEME,1);
+                    //Setup Row Id
+                    Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,1);
+                    getContentResolver().update(uri,values,null,null);
+                    Toast.makeText(SettingsActivity.this,"Dark Mode Enabled!",Toast.LENGTH_SHORT).show();
+                    restartApp();
+                }
+                else {
+                    ContentValues values = new ContentValues();
+                    values.put(SignUpEntry.COLUMN_SIGNUP_THEME,0);
+                    //Setup Row Id
+                    Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,1);
+                    getContentResolver().update(uri,values,null,null);
+                    Toast.makeText(SettingsActivity.this,"Dark Mode Disable!",Toast.LENGTH_SHORT).show();
+                    restartApp();
+                }
+            }
+        });
+
+        //App Lock Setup
+        swAppLock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (swAppLock.isChecked()){
+                    ContentValues values = new ContentValues();
+                    values.put(SignUpEntry.COLUMN_SIGNUP_LOGINPIN,1);
+                    //Setup Row Id
+                    Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,1);
+                    getContentResolver().update(uri,values,null,null);
+                    Toast.makeText(SettingsActivity.this,"App Lock Enabled!",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put(SignUpEntry.COLUMN_SIGNUP_LOGINPIN,0);
+                    //Setup Row Id
+                    Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,1);
+                    getContentResolver().update(uri,contentValues,null,null);
+                    Toast.makeText(SettingsActivity.this,"App Lock Disabled!",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         
     }
+
+    private void restartApp() {
+        startActivity(new Intent(SettingsActivity.this,SettingsActivity.class));
+        finish();
+    }
+
+    private void displaySwitches() {
+        String[] projection = {SignUpEntry.COLUMN_SIGNUP_THEME, SignUpEntry.COLUMN_SIGNUP_LOGINPIN};
+        Cursor cursor = getContentResolver().query(SignUpEntry.CONTENT_SIGNUP_URI,projection,null,null,null);
+        cursor.moveToPosition(0);
+        if (cursor.getInt(cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_THEME)) == 1)
+            swDarkMod.setChecked(true);
+        else swDarkMod.setChecked(false);
+        if (cursor.getInt(cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_LOGINPIN)) == 1)
+            swAppLock.setChecked(true);
+        else swAppLock.setChecked(false);
+        cursor.close();
+    }
+
     //Setup userName From Database
     private void displayUserName() {
         String[] projection = {SignUpEntry.COLUMN_SIGNUP_USERNAME};
@@ -115,6 +196,19 @@ public class SettingsActivity extends AppCompatActivity {
         cursor.moveToPosition(0);
         tvUserName.setText(cursor.getString(userNameColumnIndex));
         cursor.close();
+    }
+    //Setup userImage From Database
+    private void displayUserPhoto() {
+        String[] projection = {SignUpEntry.COLUMN_SIGNUP_IMAGE};
+        Cursor cursor = getContentResolver().query(SignUpEntry.CONTENT_SIGNUP_URI,projection,null,null,null);
+        int userImageColumnIndex = cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_IMAGE);
+        cursor.moveToPosition(0);
+        byte[] imageByte = cursor.getBlob(userImageColumnIndex);
+        if (imageByte != null){
+            Bitmap bt = BitmapFactory.decodeByteArray(imageByte,0,imageByte.length);
+            ivProfilePic.setImageBitmap(bt);
+            cursor.close();
+        }
     }
 
     // Picking photo from external storage
@@ -139,19 +233,6 @@ public class SettingsActivity extends AppCompatActivity {
             }catch (IOException e){
                 e.printStackTrace();
             }
-        }
-    }
-    //Setup userImage From Database
-    private void displayUserPhoto() {
-        String[] projection = {SignUpEntry.COLUMN_SIGNUP_IMAGE};
-        Cursor cursor = getContentResolver().query(SignUpEntry.CONTENT_SIGNUP_URI,projection,null,null,null);
-        int userImageColumnIndex = cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_IMAGE);
-        cursor.moveToPosition(0);
-        byte[] imageByte = cursor.getBlob(userImageColumnIndex);
-        if (imageByte != null){
-            Bitmap bt = BitmapFactory.decodeByteArray(imageByte,0,imageByte.length);
-            ivProfilePic.setImageBitmap(bt);
-            cursor.close();
         }
     }
 
@@ -209,34 +290,6 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                 });
                 ab.setView(dialogView);
-                ab.show();
-                break;
-
-            case R.id.setupLoginPin:
-                ab = new AlertDialog.Builder(SettingsActivity.this);
-                ab.setTitle("App Lock");
-                //Setting positive "Update" Button
-                ab.setPositiveButton("Enable", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int which) {
-                        ContentValues values = new ContentValues();
-                        values.put(SignUpEntry.COLUMN_SIGNUP_LOGINPIN,1);
-                        //Setup Row Id
-                        Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,1);
-                        getContentResolver().update(uri,values,null,null);
-                        Toast.makeText(SettingsActivity.this,"App Lock Enabled!",Toast.LENGTH_SHORT).show();
-                    }
-                });
-                //Setting Negative "Cancel" Button
-                ab.setNegativeButton("Disable", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        ContentValues contentValues = new ContentValues();
-                        contentValues.put(SignUpEntry.COLUMN_SIGNUP_LOGINPIN,0);
-                        //Setup Row Id
-                        Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,1);
-                        getContentResolver().update(uri,contentValues,null,null);
-                        Toast.makeText(SettingsActivity.this,"App Lock Disabled!",Toast.LENGTH_SHORT).show();
-                    }
-                });
                 ab.show();
                 break;
         }

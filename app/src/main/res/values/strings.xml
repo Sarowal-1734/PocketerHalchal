@@ -67,4 +67,6 @@
     <string name="re_enter_password">Re-Enter New Pin</string>
     <string name="setup_login_pin">App Lock</string>
     <string name="updateData">Update</string>
+    <string name="language">Language</string>
+    <string name="app_lock">App Lock</string>
 </resources>

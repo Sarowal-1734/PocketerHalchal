@@ -5,15 +5,13 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="15dp"
-    android:weightSum="3"
-    android:background="@color/black"
+    android:background="?attr/LayoutBackground"
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center">
 
@@ -32,85 +30,102 @@
             android:layout_height="wrap_content"
             android:text="@string/mr_username"
             android:drawablePadding="5dp"
-            android:textColor="@color/white"
+            android:textColor="?attr/TextColor"
             android:textSize="20sp"
             app:drawableEndCompat="@drawable/ic_edit_profile_name" />
     </LinearLayout>
-
-    <LinearLayout
+    <RelativeLayout
+        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:orientation="vertical"
-        android:weightSum="3">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="horizontal"
-            android:weightSum="2">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginEnd="5dp"
-                android:orientation="vertical">
-                <Button
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:text="@string/light"
-                    android:textColor="@color/white"
-                    android:background="@drawable/button_design"
-                    android:layout_marginBottom="30dp"/>
-                <Button
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:textColor="@color/white"
-                    android:background="@drawable/button_design"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/english" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginStart="5dp"
-                android:orientation="vertical">
-                <Button
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:textColor="@color/white"
-                    android:text="@string/dark"
-                    android:background="@drawable/button_design"
-                    android:layout_marginBottom="30dp"/>
-                <Button
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/button_design"
-                    android:text="@string/bangla" />
-            </LinearLayout>
-
-        </LinearLayout>
-
+        android:layout_height="wrap_content">
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
+            android:id="@+id/DarkMode"
+            android:paddingStart="10dp"
+            android:background="@drawable/textview_ripple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/pcNightMode"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/night_mode"/>
+            <Switch
+                android:id="@+id/swDarkMode"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/about_us"
-                android:layout_gravity="end|bottom"
-                android:textColor="@color/red"
-                android:textStyle="bold"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"/>
+                android:text="Dark Mode"
+                android:textColor="?attr/TextColor"
+                android:textSize="20sp"
+                android:checked="true"
+                android:layout_toRightOf="@+id/pcNightMode"
+                android:background="@drawable/textview_ripple"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:gravity="left"/>
         </RelativeLayout>
-    </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/AppLock"
+            android:paddingStart="10dp"
+            android:layout_below="@+id/DarkMode"
+            android:background="@drawable/textview_ripple"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="35dp"
+                android:background="@color/grayDeep"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/pcAppLock"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/app_lock"/>
+            <Switch
+                android:id="@+id/swAppLock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/app_lock"
+                android:checked="true"
+                android:textColor="?attr/TextColor"
+                android:background="@drawable/textview_ripple"
+                android:textSize="20sp"
+                android:layout_toEndOf="@+id/pcAppLock"
+                android:padding="10dp"
+                android:layout_marginTop="1dp"
+                android:focusable="true" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_below="@+id/AppLock"
+            android:paddingStart="10dp"
+            android:background="@drawable/textview_ripple"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="35dp"
+                android:background="@color/grayDeep"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/pcLanguage"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/language"/>
+            <TextView
+                android:id="@+id/tvLanguage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/language"
+                android:textColor="?attr/TextColor"
+                android:textSize="20sp"
+                android:layout_toEndOf="@+id/pcLanguage"
+                android:padding="10dp"
+                android:focusable="true" />
+        </RelativeLayout>
+    </RelativeLayout>
 </LinearLayout>

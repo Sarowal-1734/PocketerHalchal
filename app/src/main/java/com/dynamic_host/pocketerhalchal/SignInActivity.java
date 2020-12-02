@@ -1,6 +1,7 @@
 package com.dynamic_host.pocketerhalchal;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -23,6 +24,15 @@ public class SignInActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Theme
+        String[] signUpProjection = {PocketContract.SignUpEntry.COLUMN_SIGNUP_THEME};
+        Cursor cursor = getContentResolver().query(PocketContract.SignUpEntry.CONTENT_SIGNUP_URI, signUpProjection, null, null, null);
+        cursor.moveToPosition(0);
+        PocketContract.CURRENT_THEME = cursor.getInt(cursor.getColumnIndex(PocketContract.SignUpEntry.COLUMN_SIGNUP_THEME));
+        if (PocketContract.CURRENT_THEME == 1)
+            setTheme(R.style.DarkTheme);
+        else setTheme(R.style.LightTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 

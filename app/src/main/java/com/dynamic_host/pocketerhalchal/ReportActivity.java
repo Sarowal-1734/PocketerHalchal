@@ -17,6 +17,8 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.dynamic_host.pocketerhalchal.database.PocketContract;
 import com.dynamic_host.pocketerhalchal.database.PocketContract.IncomeEntry;
 import com.dynamic_host.pocketerhalchal.database.PocketContract.ExpenseEntry;
 import com.dynamic_host.pocketerhalchal.database.PocketCursorAdapter;
@@ -30,6 +32,11 @@ public class ReportActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Theme
+        if (PocketContract.CURRENT_THEME == 1)
+            setTheme(R.style.DarkTheme);
+        else setTheme(R.style.LightTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__report);
         cbIncome = findViewById(R.id.cbIncome);

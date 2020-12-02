@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ds">
+        <attr name="LayoutBackground" format="color"/>
+        <attr name="TextColor" format="color"/>
+        <attr name="ButtonColor" format="color"/>
+        <attr name="TitleBarColor" format="color"/>
+        <attr name="SettingsTitleBarColor" format="color"/>
+        <attr name="ListViewDivider" format="color"/>
+    </declare-styleable>
+</resources>

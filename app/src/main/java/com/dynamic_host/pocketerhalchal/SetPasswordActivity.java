@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.dynamic_host.pocketerhalchal.database.PocketContract;
 import com.dynamic_host.pocketerhalchal.database.PocketContract.SignUpEntry;
 
 public class SetPasswordActivity extends AppCompatActivity {
@@ -21,6 +23,9 @@ public class SetPasswordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Theme
+        setTheme(R.style.DarkTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_password);
 
@@ -45,7 +50,8 @@ public class SetPasswordActivity extends AppCompatActivity {
                     ContentValues values = new ContentValues();
                     values.put(SignUpEntry.COLUMN_SIGNUP_USERNAME,userName);
                     values.put(SignUpEntry.COLUMN_SIGNUP_PASSWORD,userPassword);
-                    values.put(SignUpEntry.COLUMN_SIGNUP_LOGINPIN,1);
+                    values.put(SignUpEntry.COLUMN_SIGNUP_LOGINPIN,1); //AppLock Enable == 1
+                    values.put(SignUpEntry.COLUMN_SIGNUP_THEME,1); //DarkMode == 1
                     Uri newUri = getContentResolver().insert(SignUpEntry.CONTENT_SIGNUP_URI,values);
                     if (newUri == null)
                         Toast.makeText(SetPasswordActivity.this, "Registration Failed! Try Again.", Toast.LENGTH_SHORT).show();

@@ -37,6 +37,11 @@ public class ExpenseEditorActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Theme
+        if (PocketContract.CURRENT_THEME == 1)
+            setTheme(R.style.DarkTheme);
+        else setTheme(R.style.LightTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_editor);
 

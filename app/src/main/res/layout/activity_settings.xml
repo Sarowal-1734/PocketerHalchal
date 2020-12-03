@@ -116,16 +116,32 @@
                 android:layout_height="25dp"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/language"/>
-            <TextView
-                android:id="@+id/tvLanguage"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/language"
-                android:textColor="?attr/TextColor"
-                android:textSize="20sp"
-                android:layout_toEndOf="@+id/pcLanguage"
-                android:padding="10dp"
-                android:focusable="true" />
+                android:layout_marginStart="25dp">
+                <TextView
+                    android:id="@+id/tvLanguage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/language"
+                    android:textColor="@color/black"
+                    android:layout_alignParentStart="true"
+                    android:textSize="20sp"
+                    android:padding="10dp"
+                    android:focusable="true" />
+                <TextView
+                    android:id="@+id/tvCurrentLanguage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/english"
+                    android:textColor="@color/gray"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="20sp"
+                    android:padding="10dp"
+                    android:paddingEnd="20dp"
+                    android:focusable="true" />
+            </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>

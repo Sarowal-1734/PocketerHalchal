@@ -55,6 +55,7 @@ public class IncomeActivity extends AppCompatActivity {
 
         setupSpinner();
 
+        //Date Picker
         tvDate.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override

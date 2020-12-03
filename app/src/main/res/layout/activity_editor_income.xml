@@ -26,6 +26,7 @@
             android:paddingEnd="15dp"
             android:layout_marginBottom="20dp"
             android:hint="@string/add_income_amount"
+            android:maxLength="8"
             android:textColor="?attr/TextColor"
             android:textColorHint="?attr/TextColor"
             android:inputType="number"
@@ -77,6 +78,7 @@
             android:gravity="top"
             android:textColor="?attr/TextColor"
             android:hint="@string/description"
+            android:maxLength="150"
             android:textColorHint="?attr/TextColor"
             android:background="@drawable/edittext_design"
             android:autofillHints="@string/description" />

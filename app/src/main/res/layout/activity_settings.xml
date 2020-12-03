@@ -125,7 +125,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/language"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/TextColor"
                     android:layout_alignParentStart="true"
                     android:textSize="20sp"
                     android:padding="10dp"

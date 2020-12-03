@@ -300,12 +300,12 @@ public class SettingsActivity extends AppCompatActivity {
                             String[] projection = {SignUpEntry.COLUMN_SIGNUP_PASSWORD};
                             Cursor cursor = getContentResolver().query(SignUpEntry.CONTENT_SIGNUP_URI,projection,null,null,null);
                             int userPassColumnIndex = cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_PASSWORD);
-                            cursor.moveToPosition(PocketContract.CURSOR_POSITION);
+                            cursor.moveToPosition(0);
                             if(oldPassword.equals(cursor.getString(userPassColumnIndex)) && newPassword.equals(confirmPassword)){
                                 ContentValues values = new ContentValues();
                                 values.put(SignUpEntry.COLUMN_SIGNUP_PASSWORD,newPassword);
                                 //Setup Row Id
-                                Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,PocketContract.CURSOR_POSITION+1);
+                                Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,1);
                                 getContentResolver().update(uri,values,null,null);
                                 Toast.makeText(SettingsActivity.this,"Password Changed!",Toast.LENGTH_SHORT).show();
                             }

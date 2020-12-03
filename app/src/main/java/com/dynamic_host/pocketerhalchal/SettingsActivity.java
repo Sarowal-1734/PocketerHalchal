@@ -15,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -94,6 +95,7 @@ public class SettingsActivity extends AppCompatActivity {
                 userName.setLayoutParams(lp);
                 userName.setText(tvUserName.getText().toString());  //Set Previous string to EditText
                 userName.setInputType(InputType.TYPE_CLASS_TEXT); //Single Line EditText
+                userName.setFilters(new InputFilter[] {new InputFilter.LengthFilter(20)}); //text max length
                 ab.setView(userName);
 
                 //Setting positive "Save" Button

@@ -24,6 +24,7 @@
         android:paddingEnd="15dp"
         android:layout_marginBottom="20dp"
         android:hint="@string/password"
+        android:maxLength="15"
         android:textColor="?attr/TextColor"
         android:textColorHint="?attr/TextColor"
         android:inputType="numberPassword"

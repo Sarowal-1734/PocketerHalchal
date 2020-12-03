@@ -66,4 +66,5 @@
     <string name="updateData">Update</string>
     <string name="language">Language</string>
     <string name="app_lock">App Lock</string>
+    <string name="amount">Amount</string>
 </resources>

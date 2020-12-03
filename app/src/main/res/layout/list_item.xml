@@ -33,16 +33,17 @@
             android:textColor="?attr/TextColor"
             android:gravity="center|left"/>
         <TextView
+            android:textAlignment="textEnd"
             android:id="@+id/list_amount"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Amount"
-            android:paddingLeft="5dp"
+            android:text="@string/amount"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:textSize="16sp"
             android:textColor="?attr/TextColor"
-            android:layout_marginLeft="1dp"
-            android:gravity="center|left"/>
+            android:layout_marginStart="1dp"/>
 </LinearLayout >

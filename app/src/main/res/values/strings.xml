@@ -28,9 +28,6 @@
     </string-array>
 
     <string name="app_name">Pocketer Halchal</string>
-    <string name="terms_condition">By clicking Sign Up, You agree to our <font color='#FF0000'>Terms &amp; Conditions</font> and that you have read our <font color='#FFE91E63'>Privacy Policy</font></string>
-    <string name="sign_up">Dont have an account? <font color="#FF0000">Sign Up</font></string>
-    <string name="forgot_password">Forgot your password?</string>
     <string name="add_income_amount">Add Income Amount:</string>
     <string name="source">Source:</string>
     <string name="dd_mm_yyyy">DD/MM/YYYY</string>
@@ -45,7 +42,7 @@
     <string name="welcome">Welcome!</string>
     <string name="email">Email:</string>
     <string name="retype_password">Retype Pin:</string>
-    <string name="sign_up_button">Sign Up</string>
+    <string name="sign_up_button">Done</string>
     <string name="date">Date</string>
     <string name="item">Item</string>
     <string name="cost">Cost</string>

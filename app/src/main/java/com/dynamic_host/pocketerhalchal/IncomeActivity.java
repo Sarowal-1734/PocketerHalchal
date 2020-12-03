@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.dynamic_host.pocketerhalchal.database.PocketContract;
 import com.dynamic_host.pocketerhalchal.database.PocketContract.IncomeEntry;
+import com.dynamic_host.pocketerhalchal.database.SharedPreference;
 
 import java.util.Calendar;
 
@@ -39,7 +40,7 @@ public class IncomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Theme
-        if (PocketContract.CURRENT_THEME == 1)
+        if (SharedPreference.getThemeValue(this) == 1)
             setTheme(R.style.DarkTheme);
         else setTheme(R.style.LightTheme);
 

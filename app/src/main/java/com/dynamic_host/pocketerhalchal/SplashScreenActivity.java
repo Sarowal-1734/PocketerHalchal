@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import com.dynamic_host.pocketerhalchal.database.PocketContract;
+import com.dynamic_host.pocketerhalchal.database.SharedPreference;
 
 public class SplashScreenActivity extends AppCompatActivity {
     @Override
@@ -20,7 +21,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         /* New Handler to start the SignInActivity
          * and close this Splash-Screen after some seconds.*/
-        String[] signUpProjection = {PocketContract.SignUpEntry.COLUMN_SIGNUP_LOGINPIN};
+        String[] signUpProjection = {PocketContract.SignUpEntry.COLUMN_SIGNUP_USERNAME};
         Cursor cursor = getContentResolver().query(PocketContract.SignUpEntry.CONTENT_SIGNUP_URI, signUpProjection, null, null, null);
         new Handler().postDelayed(new Runnable(){
             @Override
@@ -31,7 +32,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 }
                 else{
                     cursor.moveToPosition(0);
-                    if(cursor.getInt(cursor.getColumnIndex(PocketContract.SignUpEntry.COLUMN_SIGNUP_LOGINPIN)) == 1){
+                    if (SharedPreference.getThemeValue(getApplicationContext()) == 1){
                         startActivity(new Intent(SplashScreenActivity.this,SignInActivity.class));
                         cursor.close();
                         finish();

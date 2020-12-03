@@ -23,8 +23,6 @@ public class PocketDbHelper extends SQLiteOpenHelper {
                 " ("+SignUpEntry._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 SignUpEntry.COLUMN_SIGNUP_USERNAME+" TEXT, "+
                 SignUpEntry.COLUMN_SIGNUP_PASSWORD+" TEXT, "+
-                SignUpEntry.COLUMN_SIGNUP_LOGINPIN+" INTEGER, "+
-                SignUpEntry.COLUMN_SIGNUP_THEME+" INTEGER, "+
                 SignUpEntry.COLUMN_SIGNUP_IMAGE+" BLOB);";
         db.execSQL(SQL_CREATE_SIGNUP_TABLE);
 

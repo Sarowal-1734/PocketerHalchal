@@ -11,7 +11,6 @@ public class PocketContract {
     public static final String PATH_INCOME = "income_table";
     public static final String PATH_EXPENSE = "expense_table";
     public static int CURSOR_POSITION = -1;
-    public static int CURRENT_THEME = 1;
 
     public PocketContract() {}
 
@@ -23,8 +22,6 @@ public class PocketContract {
         public final static String COLUMN_SIGNUP_USERNAME = "User_Name";
         public final static String COLUMN_SIGNUP_PASSWORD = "User_Password";
         public final static String COLUMN_SIGNUP_IMAGE = "User_Photo";
-        public final static String COLUMN_SIGNUP_LOGINPIN = "Login_Pin";
-        public final static String COLUMN_SIGNUP_THEME = "App_Theme";
     }
 
     public static final class IncomeEntry implements BaseColumns {

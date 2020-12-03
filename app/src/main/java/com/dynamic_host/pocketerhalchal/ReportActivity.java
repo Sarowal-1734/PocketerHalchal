@@ -22,6 +22,7 @@ import com.dynamic_host.pocketerhalchal.database.PocketContract;
 import com.dynamic_host.pocketerhalchal.database.PocketContract.IncomeEntry;
 import com.dynamic_host.pocketerhalchal.database.PocketContract.ExpenseEntry;
 import com.dynamic_host.pocketerhalchal.database.PocketCursorAdapter;
+import com.dynamic_host.pocketerhalchal.database.SharedPreference;
 
 public class ReportActivity extends AppCompatActivity{
     CheckBox cbIncome;
@@ -33,7 +34,7 @@ public class ReportActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Theme
-        if (PocketContract.CURRENT_THEME == 1)
+        if (SharedPreference.getThemeValue(this) == 1)
             setTheme(R.style.DarkTheme);
         else setTheme(R.style.LightTheme);
 

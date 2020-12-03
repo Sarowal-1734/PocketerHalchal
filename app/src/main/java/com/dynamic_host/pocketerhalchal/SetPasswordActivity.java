@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.dynamic_host.pocketerhalchal.database.PocketContract;
 import com.dynamic_host.pocketerhalchal.database.PocketContract.SignUpEntry;
+import com.dynamic_host.pocketerhalchal.database.SharedPreference;
 
 public class SetPasswordActivity extends AppCompatActivity {
 
@@ -47,11 +48,14 @@ public class SetPasswordActivity extends AppCompatActivity {
                 else if (!userPassword.equals(userConfirmPassword))
                     etRetypePassword.setError("Password doesn't match");
                 else {
+                    //Set Initial value of AppLock, DarkMode & Language
+                    SharedPreference.setAppLockValue(getApplicationContext(),1);
+                    SharedPreference.setThemeValue(getApplicationContext(),1);
+                    SharedPreference.setLanguageValue(getApplicationContext(),1);
+
                     ContentValues values = new ContentValues();
                     values.put(SignUpEntry.COLUMN_SIGNUP_USERNAME,userName);
                     values.put(SignUpEntry.COLUMN_SIGNUP_PASSWORD,userPassword);
-                    values.put(SignUpEntry.COLUMN_SIGNUP_LOGINPIN,1); //AppLock Enable == 1
-                    values.put(SignUpEntry.COLUMN_SIGNUP_THEME,1); //DarkMode == 1
                     Uri newUri = getContentResolver().insert(SignUpEntry.CONTENT_SIGNUP_URI,values);
                     if (newUri == null)
                         Toast.makeText(SetPasswordActivity.this, "Registration Failed! Try Again.", Toast.LENGTH_SHORT).show();

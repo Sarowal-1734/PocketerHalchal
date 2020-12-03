@@ -102,6 +102,7 @@
             android:layout_below="@+id/AppLock"
             android:paddingStart="10dp"
             android:background="@drawable/textview_ripple"
+            android:id="@+id/tvLanguage"
             android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -117,11 +118,11 @@
                 android:layout_marginTop="10dp"
                 android:src="@drawable/language"/>
             <RelativeLayout
+                android:layout_marginTop="1dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp">
                 <TextView
-                    android:id="@+id/tvLanguage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/language"
@@ -139,7 +140,7 @@
                     android:layout_alignParentEnd="true"
                     android:textSize="20sp"
                     android:padding="10dp"
-                    android:paddingEnd="20dp"
+                    android:paddingEnd="15dp"
                     android:focusable="true" />
             </RelativeLayout>
         </RelativeLayout>

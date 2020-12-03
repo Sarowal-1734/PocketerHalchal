@@ -24,12 +24,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dynamic_host.pocketerhalchal.database.PocketContract;
 import com.dynamic_host.pocketerhalchal.database.PocketContract.SignUpEntry;
+import com.dynamic_host.pocketerhalchal.database.SharedPreference;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -39,8 +42,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    Switch swDarkMod, swAppLock;
-    private TextView tvUserName;
+    private Switch swDarkMod, swAppLock;
+    private RelativeLayout tvLanguage;
+    private TextView tvUserName, tvCurrentLanguage, tvEnglish, tvBangla;
     private CircleImageView ivProfilePic;
     private static final int PICK_IMAGE = 1;
     private Uri imageUri;
@@ -51,7 +55,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Theme
-        if (PocketContract.CURRENT_THEME == 1)
+        if (SharedPreference.getThemeValue(this) == 1)
             setTheme(R.style.DarkTheme);
         else setTheme(R.style.LightTheme);
 
@@ -60,6 +64,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         swDarkMod = findViewById(R.id.swDarkMode);
         swAppLock = findViewById(R.id.swAppLock);
+        tvLanguage = findViewById(R.id.tvLanguage);
+        tvCurrentLanguage = findViewById(R.id.tvCurrentLanguage);
         tvUserName = findViewById(R.id.tvUserName);
         ivProfilePic = findViewById(R.id.ivProfilePic);
 
@@ -123,21 +129,11 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (swDarkMod.isChecked()){
-                    ContentValues values = new ContentValues();
-                    values.put(SignUpEntry.COLUMN_SIGNUP_THEME,1);
-                    //Setup Row Id
-                    Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,1);
-                    getContentResolver().update(uri,values,null,null);
-                    Toast.makeText(SettingsActivity.this,"Dark Mode Enabled!",Toast.LENGTH_SHORT).show();
+                    SharedPreference.setThemeValue(getApplicationContext(),1);
                     restartApp();
                 }
                 else {
-                    ContentValues values = new ContentValues();
-                    values.put(SignUpEntry.COLUMN_SIGNUP_THEME,0);
-                    //Setup Row Id
-                    Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,1);
-                    getContentResolver().update(uri,values,null,null);
-                    Toast.makeText(SettingsActivity.this,"Dark Mode Disable!",Toast.LENGTH_SHORT).show();
+                    SharedPreference.setThemeValue(getApplicationContext(),0);
                     restartApp();
                 }
             }
@@ -147,25 +143,50 @@ public class SettingsActivity extends AppCompatActivity {
         swAppLock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (swAppLock.isChecked()){
-                    ContentValues values = new ContentValues();
-                    values.put(SignUpEntry.COLUMN_SIGNUP_LOGINPIN,1);
-                    //Setup Row Id
-                    Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,1);
-                    getContentResolver().update(uri,values,null,null);
-                    Toast.makeText(SettingsActivity.this,"App Lock Enabled!",Toast.LENGTH_SHORT).show();
+                if (swAppLock.isChecked()) {
+                    SharedPreference.setAppLockValue(getApplicationContext(), 1);
+                    Toast.makeText(SettingsActivity.this,"App Lock Enabled",Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    ContentValues contentValues = new ContentValues();
-                    contentValues.put(SignUpEntry.COLUMN_SIGNUP_LOGINPIN,0);
-                    //Setup Row Id
-                    Uri uri = ContentUris.withAppendedId(SignUpEntry.CONTENT_SIGNUP_URI,1);
-                    getContentResolver().update(uri,contentValues,null,null);
-                    Toast.makeText(SettingsActivity.this,"App Lock Disabled!",Toast.LENGTH_SHORT).show();
+                    SharedPreference.setAppLockValue(getApplicationContext(), 0);
+                    Toast.makeText(SettingsActivity.this,"App Lock Disabled",Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        
+
+        //Language setup
+        tvLanguage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater inflater = getLayoutInflater();
+                View languageView = inflater.inflate(R.layout.languages, null);
+                AlertDialog.Builder ab = new AlertDialog.Builder(SettingsActivity.this);
+                ab.setTitle("Choose Language");
+                ab.setView(languageView);
+                AlertDialog alertDialog = ab.create();
+                alertDialog.show();
+                tvEnglish = languageView.findViewById(R.id.lgEnglish);
+                tvBangla = languageView.findViewById(R.id.lgBangla);
+                tvEnglish.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SharedPreference.setLanguageValue(getApplicationContext(),1);
+                        Toast.makeText(SettingsActivity.this,"Language Changed To English",Toast.LENGTH_SHORT).show();
+                        restartApp();
+                        alertDialog.dismiss();
+                    }
+                });
+                tvBangla.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SharedPreference.setLanguageValue(getApplicationContext(),0);
+                        Toast.makeText(SettingsActivity.this,"Language Changed To Bangla",Toast.LENGTH_SHORT).show();
+                        restartApp();
+                        alertDialog.dismiss();
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -174,24 +195,22 @@ public class SettingsActivity extends AppCompatActivity {
         displayUserPhoto();
         displayUserName();
         displaySwitches();
-
+        displayLanguage();
     }
+
     private void restartApp() {
         startActivity(new Intent(this,SettingsActivity.class));
         finish();
     }
 
     private void displaySwitches() {
-        String[] projection = {SignUpEntry.COLUMN_SIGNUP_THEME, SignUpEntry.COLUMN_SIGNUP_LOGINPIN};
-        Cursor cursor = getContentResolver().query(SignUpEntry.CONTENT_SIGNUP_URI,projection,null,null,null);
-        cursor.moveToPosition(0);
-        if (cursor.getInt(cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_THEME)) == 1)
+
+        if (SharedPreference.getThemeValue(this) == 1)
             swDarkMod.setChecked(true);
         else swDarkMod.setChecked(false);
-        if (cursor.getInt(cursor.getColumnIndex(SignUpEntry.COLUMN_SIGNUP_LOGINPIN)) == 1)
+        if (SharedPreference.getAppLockValue(this) == 1)
             swAppLock.setChecked(true);
         else swAppLock.setChecked(false);
-        cursor.close();
     }
 
     //Setup userName From Database
@@ -215,6 +234,13 @@ public class SettingsActivity extends AppCompatActivity {
             ivProfilePic.setImageBitmap(bt);
             cursor.close();
         }
+    }
+
+    //Show Current Language From Database
+    private void displayLanguage() {
+        if (SharedPreference.getLanguageValue(this) == 1)
+            tvCurrentLanguage.setText("English");
+        else tvCurrentLanguage.setText("Bangla");
     }
 
     // Picking photo from external storage
@@ -241,6 +267,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

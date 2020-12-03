@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.dynamic_host.pocketerhalchal.database.PocketContract;
+import com.dynamic_host.pocketerhalchal.database.SharedPreference;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
@@ -28,11 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Theme
-        String[] signUpProjection = {PocketContract.SignUpEntry.COLUMN_SIGNUP_THEME};
-        Cursor cursor = getContentResolver().query(PocketContract.SignUpEntry.CONTENT_SIGNUP_URI, signUpProjection, null, null, null);
-        cursor.moveToPosition(0);
-        PocketContract.CURRENT_THEME = cursor.getInt(cursor.getColumnIndex(PocketContract.SignUpEntry.COLUMN_SIGNUP_THEME));
-        if (PocketContract.CURRENT_THEME == 1)
+        if (SharedPreference.getThemeValue(this) == 1)
             setTheme(R.style.DarkTheme);
         else setTheme(R.style.LightTheme);
 
@@ -106,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         pieChart.setDrawEntryLabels(false);
         pieChart.setHoleRadius(40);
         //Theme
-        if (PocketContract.CURRENT_THEME == 1){
+        if (SharedPreference.getThemeValue(this) == 1){
             pieChart.setHoleColor(Color.BLACK);
             pieChart.setCenterTextColor(Color.WHITE);
             l.setTextColor(Color.WHITE);

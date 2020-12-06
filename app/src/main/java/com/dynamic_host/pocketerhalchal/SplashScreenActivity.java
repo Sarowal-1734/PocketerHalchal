@@ -1,12 +1,12 @@
 package com.dynamic_host.pocketerhalchal;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.dynamic_host.pocketerhalchal.database.PocketContract;
 import com.dynamic_host.pocketerhalchal.database.SharedPreference;
 
@@ -32,7 +32,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 }
                 else{
                     cursor.moveToPosition(0);
-                    if (SharedPreference.getThemeValue(getApplicationContext()) == 1){
+                    if (SharedPreference.getAppLockValue(getApplicationContext()) == 1){
                         startActivity(new Intent(SplashScreenActivity.this,SignInActivity.class));
                         cursor.close();
                         finish();

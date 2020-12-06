@@ -38,7 +38,7 @@
                android:text="@string/income"
                android:textSize="18sp"
                android:textColor="?attr/TextColor"
-               android:buttonTint="@color/green"
+               android:buttonTint="#329835"
                android:layout_marginEnd="10dp"
                android:layout_toStartOf="@id/cbExpense"
                android:layout_alignParentBottom="true"
@@ -97,7 +97,7 @@
             android:layout_marginLeft="1dp"
             android:gravity="center|left"/>
     </LinearLayout>
-<ListView
+<com.baoyz.swipemenulistview.SwipeMenuListView
     android:id="@+id/list_report"
     android:layout_width="match_parent"
     android:layout_height="0dp"

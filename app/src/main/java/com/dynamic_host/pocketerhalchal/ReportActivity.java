@@ -18,6 +18,7 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.dynamic_host.pocketerhalchal.database.PocketContract;
 import com.dynamic_host.pocketerhalchal.database.PocketContract.IncomeEntry;
 import com.dynamic_host.pocketerhalchal.database.PocketContract.ExpenseEntry;
@@ -27,7 +28,7 @@ import com.dynamic_host.pocketerhalchal.database.SharedPreference;
 public class ReportActivity extends AppCompatActivity{
     CheckBox cbIncome;
     CheckBox cbExpense;
-    ListView listView;
+    SwipeMenuListView listView;
     String source, incomeDescription, expenseDescription, item;
     Uri uri;
 
@@ -42,7 +43,7 @@ public class ReportActivity extends AppCompatActivity{
         setContentView(R.layout.activity__report);
         cbIncome = findViewById(R.id.cbIncome);
         cbExpense = findViewById(R.id.cbExpense);
-        listView = findViewById(R.id.list_report);   //activity_catalog->ListView->id
+        listView = (SwipeMenuListView) findViewById(R.id.list_report);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -165,7 +166,7 @@ public class ReportActivity extends AppCompatActivity{
                 break;
         }
         if (!cbIncome.isChecked() && !cbExpense.isChecked()){
-            listView.setAdapter(null);
+            listView.setAdapter(new PocketCursorAdapter(this,null,0));
         }
     }
 

@@ -284,7 +284,7 @@ public class SettingsActivity extends AppCompatActivity {
         {
             case R.id.changePassword:
                 AlertDialog.Builder ab = new AlertDialog.Builder(SettingsActivity.this);
-                ab.setTitle("Change Password");
+                ab.setTitle(R.string.change_password);
 
                 //Setting positive "Update" Button
                 ab.setPositiveButton("Update", new DialogInterface.OnClickListener() {

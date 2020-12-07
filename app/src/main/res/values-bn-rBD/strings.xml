@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="income_source">
+        <item>বেতন</item>
+        <item>ব্যবসায়িক মুনাফা</item>
+        <item>অন্যান্য মুনাফা</item>
+        <item>ধার</item>
+        <item>উপহার</item>
+        <item>আত্মীয়ের থেকে উপহার</item>
+        <item>বন্ধুর থেকে উপহার</item>
+        <item>অন্যান্য</item>
+    </string-array>
+
+    <string-array name="expense_item">
+        <item>সকালের নাস্তা</item>
+        <item>দুপুরের খাবার</item>
+        <item>রাতের খাবার</item>
+        <item>নাস্তা</item>
+        <item>পানীয়</item>
+        <item>ধূমপান</item>
+        <item>পোশাক</item>
+        <item>ভ্রমণ</item>
+        <item>বাড়ি ভাড়া</item>
+        <item>ওষুধ</item>
+        <item>পড়াশোনার উপকরণ</item>
+        <item>পড়াশোনার ফি</item>
+        <item>অন্যান্য</item>
+    </string-array>
+
+    <string name="app_name">পকেটের হালচাল</string>
+    <string name="add_income_amount">আয়ের পরিমাণ যুক্ত করুনঃ</string>
+    <string name="source">আয়ের উৎসঃ</string>
+    <string name="dd_mm_yyyy">তারিখঃ</string>
+    <string name="description">বর্ণনাঃ (ঐচ্ছিক)</string>
+    <string name="submit">সাবমিট</string>
+    <string name="add_expense_amount">ব্যয়ের পরিমাণ যুক্ত করুনঃ</string>
+    <string name="expense_item">ব্যয় আইটেমঃ</string>
+    <string name="username">ব্যবহারকারীর নামঃ</string>
+    <string name="password">পিনঃ</string>
+    <string name="sign_in">সাইন ইন করুন</string>
+    <string name="welcome">স্বাগত!</string>
+    <string name="email">ইমেলঃ</string>
+    <string name="retype_password">পুনরায় টাইপ করুন:</string>
+    <string name="sign_up_button">নিবন্ধন করুন</string>
+    <string name="date">তারিখ</string>
+    <string name="item">আইটেম</string>
+    <string name="cost">দাম</string>
+    <string name="mr_username">মিঃ নাম</string>
+    <string name="about_us">আমাদের সম্পর্কে</string>
+    <string name="bangla">বাংলা</string>
+    <string name="english">English</string>
+    <string name="income">আয়</string>
+    <string name="expense">ব্যয়</string>
+    <string name="filter_by">ফিল্টার করুনঃ</string>
+    <string name="update">চালু করুন</string>
+    <string name="delete_all">সব মুছে ফেলুন</string>
+    <string name="change_password">পিন পরিবর্তন করুন</string>
+    <string name="old_password">পুরাতন পিনঃ</string>
+    <string name="enter_new_password">নতুন পিনঃ</string>
+    <string name="re_enter_password">পুনরায় নতুন পুনঃ</string>
+    <string name="setup_login_pin">অ্যাপ লক</string>
+    <string name="updateData">আপডেট</string>
+    <string name="language">ভাষা</string>
+    <string name="app_lock">অ্যাপ লক</string>
+    <string name="amount">পরিমাণ</string>
+    <string name="dark_mode">নাইট মোড</string>
+</resources>

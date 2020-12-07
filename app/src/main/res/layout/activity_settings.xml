@@ -54,7 +54,7 @@
                 android:id="@+id/swDarkMode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dark Mode"
+                android:text="@string/dark_mode"
                 android:textColor="?attr/TextColor"
                 android:textSize="20sp"
                 android:checked="true"

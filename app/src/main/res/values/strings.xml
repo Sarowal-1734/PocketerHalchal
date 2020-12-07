@@ -38,21 +38,16 @@
     <string name="username">Username:</string>
     <string name="password">Pin:</string>
     <string name="sign_in">Sign In</string>
-    <string name="connect_with_facebook">Connect With Facebook</string>
     <string name="welcome">Welcome!</string>
     <string name="email">Email:</string>
     <string name="retype_password">Retype Pin:</string>
-    <string name="sign_up_button">Done</string>
     <string name="date">Date</string>
     <string name="item">Item</string>
     <string name="cost">Cost</string>
     <string name="mr_username">Mr. Username</string>
     <string name="about_us">About Us</string>
-    <string name="logout">Logout</string>
     <string name="bangla">বাংলা</string>
-    <string name="dark">Dark</string>
     <string name="english">English</string>
-    <string name="light">Light</string>
     <string name="income">Income</string>
     <string name="expense">Expense</string>
     <string name="filter_by">Filter By:</string>
@@ -67,4 +62,6 @@
     <string name="language">Language</string>
     <string name="app_lock">App Lock</string>
     <string name="amount">Amount</string>
+    <string name="sign_up_button">Done</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>

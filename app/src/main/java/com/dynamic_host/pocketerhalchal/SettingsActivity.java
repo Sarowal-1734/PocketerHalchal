@@ -9,6 +9,7 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -37,6 +38,7 @@ import com.dynamic_host.pocketerhalchal.database.SharedPreference;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -241,8 +243,8 @@ public class SettingsActivity extends AppCompatActivity {
     //Show Current Language From Database
     private void displayLanguage() {
         if (SharedPreference.getLanguageValue(this) == 1)
-            tvCurrentLanguage.setText("English");
-        else tvCurrentLanguage.setText("Bangla");
+            tvCurrentLanguage.setText(R.string.english);
+        else tvCurrentLanguage.setText(R.string.bangla);
     }
 
     // Picking photo from external storage

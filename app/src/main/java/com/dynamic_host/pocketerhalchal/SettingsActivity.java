@@ -196,7 +196,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        displayUserPhoto();
+        //displayUserPhoto();
         displayUserName();
         displaySwitches();
         displayLanguage();
@@ -265,7 +265,7 @@ public class SettingsActivity extends AppCompatActivity {
                 long id = getContentResolver().update(uri,values,null,null);
                 if (id!= -1)
                     Toast.makeText(SettingsActivity.this,"Image Update Successful!",Toast.LENGTH_SHORT).show();
-                displayUserPhoto();
+                //displayUserPhoto();
             }catch (IOException e){
                 e.printStackTrace();
             }

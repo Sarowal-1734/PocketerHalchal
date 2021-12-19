@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dynamic_host.pocketerhalchal">
 
-    <uses-sdk
-        android:minSdkVersion="21"
-        android:targetSdkVersion="31" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -19,7 +15,8 @@
 
         <activity
             android:name=".SplashScreenActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

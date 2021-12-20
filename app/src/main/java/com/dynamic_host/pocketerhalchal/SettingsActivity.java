@@ -196,7 +196,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //displayUserPhoto();
+        displayUserPhoto();
         displayUserName();
         displaySwitches();
         displayLanguage();
